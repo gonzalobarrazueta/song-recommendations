@@ -21,6 +21,12 @@ mat-card {
   animation: bg-gradient 3s infinite alternate;
 }
 
+mat-card {
+  h1 {
+    font-family: 'Tilt Warp', cursive;
+  }
+}
+
 @keyframes bg-gradient {
   0% {
     background-position: left;
