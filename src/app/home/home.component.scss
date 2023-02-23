@@ -24,6 +24,7 @@ mat-card {
 mat-card {
   h1 {
     font-family: 'Tilt Warp', cursive;
+    font-size: var(--fs-500);
   }
 }
 
@@ -45,5 +46,9 @@ mat-card {
   mat-card {
     grid-row: 2 / 3;
     grid-column: 2 / 4;
+
+    h1 {
+      font-size: var(--fs-600);
+    }
   }
 }
