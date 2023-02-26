@@ -1,0 +1,48 @@
+figure {
+  border-width: 1px;
+  border-style: solid;
+  border-radius: var(--border-radius);
+  box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+
+  max-width: 250px;
+
+  display: grid;
+
+  img {
+    width: 100%;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+  }
+}
+
+.song-information {
+  padding: 8px 16px;
+  border-radius: 0 0 var(--border-radius) var(--border-radius);
+
+  h2 {
+    margin: 0 0 5px 0;
+    font-family: 'Tilt Warp', cursive;
+    font-size: var(--fs-400);
+  }
+}
+
+.artist {
+  //border: 3px solid aquamarine;
+  display: flex;
+  align-items: center;
+
+  .profile-img {
+    border: 1px solid darkgray;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 100%;
+    max-width: 30px;
+    display: flex;
+  }
+
+  h3 {
+    margin: 0 0 0 10px;
+    font-family: 'Tilt Warp', cursive;
+    font-size: var(--fs-300);
+  }
+
+}

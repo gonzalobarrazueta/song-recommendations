@@ -9,12 +9,14 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
 import { HttpClientModule } from "@angular/common/http";
 import { AuthCallbackComponent } from './auth-callback/auth-callback.component';
+import { SongCardComponent } from './song-card/song-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    AuthCallbackComponent
+    AuthCallbackComponent,
+    SongCardComponent
   ],
   imports: [
     BrowserModule,
