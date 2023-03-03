@@ -10,8 +10,8 @@ export class SpotifyService {
 
   constructor(private http: HttpClient) { }
 
-  getUsersTopItems(access_token: string) {
+  getTopItems(access_token: string, type: string) {
     let headers = new HttpHeaders().set('Authorization', `Bearer ${access_token}`);
-    return this.http.get(`${base_address}/me`, { headers });
+    return this.http.get(`${base_address}/me/top/${type}?limit=4`, {headers});
   }
 }
