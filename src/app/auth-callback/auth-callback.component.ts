@@ -3,6 +3,7 @@ import { ActivatedRoute } from "@angular/router";
 import { delay } from "rxjs/operators";
 import { SpotifyAuthService } from "../services/spotify-auth.service";
 import { SpotifyService } from "../services/spotify.service";
+import { Track } from "../models/track";
 
 @Component({
   selector: 'app-auth-callback',
@@ -14,7 +15,7 @@ export class AuthCallbackComponent implements OnInit {
   private auth_code: string = '';
   private access_token: string = '';
 
-  top_tracks: any[] = [];
+  top_tracks: Track[] = [];
   artists: Object = {};
 
   constructor(private route: ActivatedRoute, private spotifyAuth: SpotifyAuthService, private spotify: SpotifyService) {}
@@ -43,9 +44,16 @@ export class AuthCallbackComponent implements OnInit {
   }
 
   getTopTracks() {
+    let track;
     const top_tracks$ = this.spotify.getTopItems(this.access_token, 'tracks');
+
     top_tracks$.subscribe((response: any) => {
-      for (let track of response['items']) {
+      for (let _track of response['items']) {
+        track = {
+          name: _track.name,
+          img: _track.album.images[1].url,
+          performed_by: _track.artists[0].name
+        }
         this.top_tracks.push(track);
       }
     });
