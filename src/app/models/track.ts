@@ -1,5 +1,5 @@
 export interface Track {
   name: string,
   img: string,
-  performed_by: Array<string>
+  artist: { id: string, name: string, img: string }
 }
