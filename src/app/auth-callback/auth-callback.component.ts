@@ -16,7 +16,7 @@ export class AuthCallbackComponent implements OnInit {
   private access_token: string = '';
 
   top_tracks: Track[] = [];
-  artists: Object = {};
+  artists = new Map();
 
   constructor(private route: ActivatedRoute, private spotifyAuth: SpotifyAuthService, private spotify: SpotifyService) {}
 
@@ -34,7 +34,7 @@ export class AuthCallbackComponent implements OnInit {
   }
 
   getAccessToken() {
-    const access_token$ = this.spotifyAuth.getAccessToken(this.auth_code).pipe(delay(3000));
+    const access_token$ = this.spotifyAuth.getAccessToken(this.auth_code).pipe(delay(2000));
     access_token$.subscribe({
       next: (response) => {
         this.access_token = response.access_token;
@@ -44,7 +44,7 @@ export class AuthCallbackComponent implements OnInit {
   }
 
   getTopTracks() {
-    let track;
+    let track: Track;
     const top_tracks$ = this.spotify.getTopItems(this.access_token, 'tracks');
 
     top_tracks$.subscribe((response: any) => {
@@ -52,19 +52,30 @@ export class AuthCallbackComponent implements OnInit {
         track = {
           name: _track.name,
           img: _track.album.images[1].url,
-          performed_by: _track.artists[0].name
+          artist: {
+            id: _track.artists[0].id,
+            name: _track.artists[0].name,
+            img: ''
+          }
         }
         this.top_tracks.push(track);
       }
     });
   }
 
-  getArtist(artist_id: string) {
-    const artist$ = this.spotify.getArtistById(this.access_token, artist_id);
-    artist$.subscribe({
-      next: (response) => {
-        console.log(response);
-      }
-    })
+  getTopTracksArtists() {
+    for (let i = 0; i < this.top_tracks.length; i++) {
+      const artist$ = this.spotify.getArtistById(this.access_token, this.top_tracks[i].artist.id);
+
+      artist$.subscribe((artist: any) => {
+        this.top_tracks[i].artist['img'] = artist.images[2].url;
+      })
+    }
+  }
+
+  getUsersTopSongs() {
+    this.getTopTracks();
+    this.getTopTracksArtists();
+    console.log(this.top_tracks);
   }
 }
