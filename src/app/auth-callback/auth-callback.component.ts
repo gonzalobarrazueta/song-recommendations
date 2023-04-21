@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
-import { delay } from "rxjs/operators";
+import { ActivatedRoute, Params } from "@angular/router";
 import { SpotifyAuthService } from "../services/spotify-auth.service";
 import { SpotifyService } from "../services/spotify.service";
 import { Track } from "../models/track";
+import { Observable } from "rxjs";
 
 @Component({
   selector: 'app-auth-callback',
@@ -21,25 +21,16 @@ export class AuthCallbackComponent implements OnInit {
   constructor(private route: ActivatedRoute, private spotifyAuth: SpotifyAuthService, private spotify: SpotifyService) {}
 
   ngOnInit(): void {
-    this.getAuthCode();
-    this.getAccessToken();
-  }
-
-  getAuthCode() {
-    const params$ = this.route.queryParams;
+    // Gets auth code and access token
+    const params$: Observable<Params> = this.route.queryParams;
     params$.subscribe((params) => {
-      this.auth_code = params['code'];
-      console.log('Auth code', this.auth_code);
-    });
-  }
+      this.auth_code = params['code']
+      console.log(`Auth code: ${this.auth_code}`)
 
-  getAccessToken() {
-    const access_token$ = this.spotifyAuth.getAccessToken(this.auth_code).pipe(delay(2000));
-    access_token$.subscribe({
-      next: (response) => {
+      const access_token$ = this.spotifyAuth.getAccessToken(this.auth_code)
+      access_token$.subscribe(response => {
         this.access_token = response.access_token;
-        console.log('Access token', this.access_token);
-      }
+      });
     });
   }
 
