@@ -18,7 +18,7 @@ export class SpotifyAuthService {
       redirect_uri: environment.redirect_uri
     });
 
-    window.location.href = 'https://accounts.spotify.com/authorize?' + query_parameters.toString();
+    window.location.assign('https://accounts.spotify.com/authorize?' + query_parameters.toString());
   }
 
   getAccessToken(authCode: string): Observable<any> {
