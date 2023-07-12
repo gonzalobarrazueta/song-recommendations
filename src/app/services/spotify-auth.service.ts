@@ -21,18 +21,23 @@ export class SpotifyAuthService {
     window.location.assign('https://accounts.spotify.com/authorize?' + query_parameters.toString());
   }
 
-  getAccessToken(authCode: string): Observable<any> {
-
+  async getAccessToken(authCode: string) {
     let body = new URLSearchParams({
       grant_type: 'authorization_code',
       code: authCode,
       redirect_uri: environment.redirect_uri
     });
 
-    let headers = new HttpHeaders().
-      set('content-type', 'application/x-www-form-urlencoded')
-      .set('Authorization', 'Basic ' + btoa(`${environment.client_id}:${environment.client_secret}`));
+    let headers = new Headers();
+    headers.set('content-type', 'application/x-www-form-urlencoded');
+    headers.set('Authorization', 'Basic ' + btoa(`${environment.client_id}:${environment.client_secret}`));
 
-    return this.http.post('https://accounts.spotify.com/api/token', body, { headers });
+    let response = await fetch('https://accounts.spotify.com/api/token', {
+      method: "POST",
+      headers: headers,
+      body: body
+    })
+
+    return response
   }
 }
