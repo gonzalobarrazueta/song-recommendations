@@ -21,7 +21,7 @@ export class AuthCallbackComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAuthorization();
-    setTimeout(() => console.log(this.access_token), 1000)
+    setTimeout(() => this.getUserTopItems(), 1000)
   }
 
   getAuthorization() {
@@ -39,5 +39,21 @@ export class AuthCallbackComponent implements OnInit {
         this.access_token = data.access_token;
       })
       .catch(error => console.error("Error:", error));
+  }
+
+  getUserTopItems() {
+    this.spotify._getTopItems(this.access_token, "tracks")
+      .then(response => {
+        console.log(response);
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("Request failed with status " + response.status);
+        }
+      })
+      .then(data => {
+        console.log(data);
+      })
+      .catch(error => console.error("Error:", error))
   }
 }
