@@ -13,7 +13,7 @@ export class AuthCallbackComponent implements OnInit {
 
   private auth_code: string = '';
   private access_token: string = '';
-
+  private responseTracks: Array<any> = [];
   top_tracks: Track[] = [];
   artists = new Map();
 
@@ -21,7 +21,6 @@ export class AuthCallbackComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAuthorization();
-    setTimeout(() => this.getUserTopItems(), 1000)
   }
 
   getAuthorization() {
@@ -41,8 +40,8 @@ export class AuthCallbackComponent implements OnInit {
       .catch(error => console.error("Error:", error));
   }
 
-  getUserTopItems() {
-    this.spotify._getTopItems(this.access_token, "tracks")
+  getUserTopTracks() {
+    this.spotify.getTopItems(this.access_token, "tracks")
       .then(response => {
         console.log(response);
         if (response.ok) {
@@ -52,8 +51,24 @@ export class AuthCallbackComponent implements OnInit {
         }
       })
       .then(data => {
-        console.log(data);
+        this.responseTracks = data.items;
+        let tracks = this.responseTracks;
+        for (let i = 0; i < tracks.length; i++) {
+          this.top_tracks.push(this.buildTracks(tracks[i]));
+        }
       })
       .catch(error => console.error("Error:", error))
+  }
+
+  buildTracks(track: any): Track {
+    return {
+      name: track.name,
+      img: track.album.images[1].url,
+      artist: {
+        id: track.artists[0].id,
+        name: track.artists[0].name,
+        img: ''
+      }
+    }
   }
 }
