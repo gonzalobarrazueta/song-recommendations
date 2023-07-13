@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router, NavigationExtras } from "@angular/router";
 import { SpotifyAuthService } from "../services/spotify-auth.service";
 import { SpotifyService } from "../services/spotify.service";
 import { Track } from "../models/track";
@@ -17,7 +17,7 @@ export class AuthCallbackComponent implements OnInit {
   top_tracks: Track[] = [];
   artists = new Map();
 
-  constructor(private route: ActivatedRoute, private spotifyAuth: SpotifyAuthService, private spotify: SpotifyService) {}
+  constructor(private route: ActivatedRoute, private router: Router, private spotifyAuth: SpotifyAuthService, private spotify: SpotifyService) {}
 
   ngOnInit(): void {
     this.getAuthorization();
@@ -55,7 +55,11 @@ export class AuthCallbackComponent implements OnInit {
         for (let i = 0; i < tracks.length; i++) {
           this.top_tracks.push(this.buildTracks(tracks[i]));
         }
-        this.assignArtistToTracks();
+        this.assignArtistToTracks()
+          .then(() => {
+            this.navigateToRecommendationsComponent();
+          })
+          .catch(error => console.error("Error:", error));
       })
       .catch(error => console.error("Error:", error))
   }
@@ -72,13 +76,7 @@ export class AuthCallbackComponent implements OnInit {
     }
   }
 
-  assignArtistToTracks() {
-    this.getArtists()
-      .then(value => {})
-      .catch(error => console.log(error))
-  }
-
-  async getArtists() {
+  async assignArtistToTracks() {
     for (let i = 0; i < this.top_tracks.length; i++) {
       try {
         const response = await this.spotify.getArtistById(this.access_token, this.top_tracks[i].artist.id);
@@ -101,5 +99,12 @@ export class AuthCallbackComponent implements OnInit {
     } else {
       this.artists.set(responseArtist.id, "../../assets/images/artist_profile_template.png");
     }
+  }
+
+  navigateToRecommendationsComponent() {
+    const navigationExtras: NavigationExtras = {
+      queryParams: { data: JSON.stringify(this.top_tracks) }
+    };
+    this.router.navigate(["/recommendations"], navigationExtras);
   }
 }

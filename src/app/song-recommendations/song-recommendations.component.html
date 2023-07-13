@@ -1,1 +1,3 @@
-<p>song-recommendations works!</p>
+<div class="song-list" *ngIf="topTracks.length > 0">
+  <app-song-card *ngFor="let track of topTracks" [song]="track"></app-song-card>
+</div>

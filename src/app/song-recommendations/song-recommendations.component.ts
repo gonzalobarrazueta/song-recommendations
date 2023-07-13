@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from "@angular/router";
+import { Track } from "../models/track";
 
 @Component({
   selector: 'app-song-recommendations',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SongRecommendationsComponent implements OnInit {
 
-  constructor() { }
+  topTracks: Track[] = [];
+
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    const urlParams = new URLSearchParams(window.location.search);
+    this.topTracks = JSON.parse(urlParams.get("data") as string);
   }
 
 }
