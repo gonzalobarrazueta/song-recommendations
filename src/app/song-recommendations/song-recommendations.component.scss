@@ -1,4 +1,24 @@
+.page-container {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 40px;
+}
+
+.page-title {
+  margin-top: 25px;
+  padding: 0 3%;
+
+  h1 {
+    margin: 0;
+    font-family: 'Tilt Warp', cursive;
+    font-size: var(--fs-600);
+  }
+}
+
 .song-list {
+  padding: 0 3%;
+
   display: flex;
   flex-flow: row wrap;
+  justify-content: space-between;
 }
