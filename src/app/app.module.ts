@@ -10,13 +10,15 @@ import { MatCardModule } from "@angular/material/card";
 import { HttpClientModule } from "@angular/common/http";
 import { AuthCallbackComponent } from './auth-callback/auth-callback.component';
 import { SongCardComponent } from './song-card/song-card.component';
+import { SongRecommendationsComponent } from './song-recommendations/song-recommendations.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     AuthCallbackComponent,
-    SongCardComponent
+    SongCardComponent,
+    SongRecommendationsComponent
   ],
   imports: [
     BrowserModule,
