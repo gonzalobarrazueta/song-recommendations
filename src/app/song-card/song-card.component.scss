@@ -14,6 +14,11 @@ figure {
   }
 }
 
+figure:hover {
+  cursor: pointer;
+  filter: drop-shadow(7px 8px 20px rgba(0, 0, 0, 0.25));
+}
+
 .song-information {
   padding: 4px 16px 8px 16px;
   border-radius: 0 0 var(--border-radius) var(--border-radius);
