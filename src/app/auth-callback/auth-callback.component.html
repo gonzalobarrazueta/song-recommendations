@@ -1,0 +1,4 @@
+<button mat-raised-button (click)="getUserTopTracks()">Get Top Songs</button>
+<div class="song-list" *ngIf="top_tracks.length > 0">
+  <app-song-card *ngFor="let track of top_tracks" [song]="track"></app-song-card>
+</div>
