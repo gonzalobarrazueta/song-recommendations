@@ -41,7 +41,7 @@ export class AuthCallbackComponent implements OnInit {
   }
 
   getUserTopTracks() {
-    this.spotify.getTopItems(this.access_token, "tracks", 5)
+    this.spotify.getTopItems(this.access_token, "tracks", 6)
       .then(response => {
         if (response.ok) {
           return response.json();
