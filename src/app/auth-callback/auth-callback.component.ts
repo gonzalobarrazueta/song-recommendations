@@ -43,7 +43,6 @@ export class AuthCallbackComponent implements OnInit {
   getUserTopTracks() {
     this.spotify.getTopItems(this.access_token, "tracks")
       .then(response => {
-        console.log(response);
         if (response.ok) {
           return response.json();
         } else {
@@ -56,6 +55,7 @@ export class AuthCallbackComponent implements OnInit {
         for (let i = 0; i < tracks.length; i++) {
           this.top_tracks.push(this.buildTracks(tracks[i]));
         }
+        this.assignArtistToTracks();
       })
       .catch(error => console.error("Error:", error))
   }
@@ -69,6 +69,37 @@ export class AuthCallbackComponent implements OnInit {
         name: track.artists[0].name,
         img: ''
       }
+    }
+  }
+
+  assignArtistToTracks() {
+    this.getArtists()
+      .then(value => {})
+      .catch(error => console.log(error))
+  }
+
+  async getArtists() {
+    for (let i = 0; i < this.top_tracks.length; i++) {
+      try {
+        const response = await this.spotify.getArtistById(this.access_token, this.top_tracks[i].artist.id);
+        if (response.ok) {
+          const responseArtist = await response.json();
+          this.mapArtists(responseArtist);
+          this.top_tracks[i].artist.img = this.artists.get(responseArtist.id);
+        } else {
+          throw new Error("Request failed with status " + response.status);
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    }
+  }
+
+  mapArtists(responseArtist: any) {
+    if (responseArtist.images.length > 0) {
+      this.artists.set(responseArtist.id, responseArtist.images[2].url);
+    } else {
+      this.artists.set(responseArtist.id, "../../assets/images/artist_profile_template.png");
     }
   }
 }
