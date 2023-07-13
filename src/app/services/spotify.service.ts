@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 let base_address = 'https://api.spotify.com/v1';
 
@@ -8,7 +7,7 @@ let base_address = 'https://api.spotify.com/v1';
 })
 export class SpotifyService {
 
-  constructor(private http: HttpClient) { }
+  constructor() { }
 
   async getTopItems(access_token: string, type: string, limit: number) {
     let headers = new Headers();
