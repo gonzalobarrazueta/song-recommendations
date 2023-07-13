@@ -4,7 +4,7 @@ figure {
   border-radius: var(--border-radius);
   box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
 
-  max-width: 200px;
+  max-width: 170px;
 
   display: grid;
 
@@ -18,11 +18,19 @@ figure {
   padding: 4px 16px 8px 16px;
   border-radius: 0 0 var(--border-radius) var(--border-radius);
 
-  h2 {
-    margin: 0;
-    font-family: 'Tilt Warp', cursive;
-    font-size: var(--fs-300);
-  }
+  .song-title {
+    margin: 5px 0;
+    max-height: 30px;
+    overflow: hidden;
+
+    h2 {
+      margin: 0;
+      height: 100%;
+      font-family: 'Tilt Warp', cursive;
+      font-size: var(--fs-300);
+      line-height: 15px;
+    }
+  };
 }
 
 .artist {
