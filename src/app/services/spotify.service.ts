@@ -23,7 +23,14 @@ export class SpotifyService {
   }
 
   getArtistById(access_token: string, id: string) {
-    let headers = new HttpHeaders().set('Authorization', `Bearer ${access_token}`);
-     return this.http.get(`${base_address}/artists/${id}`, {headers});
+    let headers = new Headers();
+    headers.set('Authorization', `Bearer ${access_token}`);
+
+    const requestOptions = {
+      method: "GET",
+      headers: headers
+    }
+
+     return fetch(`${base_address}/artists/${id}`, requestOptions);
   }
 }
