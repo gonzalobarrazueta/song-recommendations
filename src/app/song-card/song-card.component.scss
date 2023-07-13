@@ -43,7 +43,13 @@ figure {
     overflow: hidden;
     width: 100%;
     max-width: 30px;
+    height: auto;
+    max-height: 30px;
     display: flex;
+
+    img {
+      object-fit: cover;
+    }
   }
 
   h3 {
