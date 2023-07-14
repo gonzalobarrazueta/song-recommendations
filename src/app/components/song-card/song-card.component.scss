@@ -32,8 +32,9 @@ figure:hover {
     h2 {
       margin: 0;
       height: 100%;
-      font-family: 'Tilt Warp', cursive;
+      font-family: Inter, 'Tilt Warp', cursive;
       font-size: var(--fs-300);
+      font-weight: 700;
       line-height: 15px;
     }
   };
@@ -60,7 +61,8 @@ figure:hover {
 
   h3 {
     margin: 0 0 0 10px;
-    font-family: 'Tilt Warp', cursive;
+    font-family: Inter, 'Tilt Warp', cursive;
     font-size: var(--fs-300);
+    font-weight: 600;
   }
 }

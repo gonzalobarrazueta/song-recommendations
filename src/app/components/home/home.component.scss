@@ -23,8 +23,9 @@ mat-card {
 
 mat-card {
   h1 {
-    font-family: 'Tilt Warp', cursive;
+    font-family: Inter, 'Tilt Warp', cursive;
     font-size: var(--fs-500);
+    font-weight: 800;
   }
 }
 
