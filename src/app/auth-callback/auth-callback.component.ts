@@ -17,8 +17,11 @@ export class AuthCallbackComponent implements OnInit {
   private responseTracks: Array<any> = [];
   top_tracks: Track[] = [];
   artists = new Map();
+  buildTracks: ((track: any) => Track);
 
-  constructor(private route: ActivatedRoute, private router: Router, private spotifyAuth: SpotifyAuthService, private spotify: SpotifyService, private sharedService: SharedService) {}
+  constructor(private route: ActivatedRoute, private router: Router, private spotifyAuth: SpotifyAuthService, private spotify: SpotifyService, private sharedService: SharedService) {
+    this.buildTracks = this.sharedService.buildTracks;
+  }
 
   ngOnInit(): void {
     this.getAuthorization();
@@ -64,19 +67,6 @@ export class AuthCallbackComponent implements OnInit {
           .catch(error => console.error("Error:", error));
       })
       .catch(error => console.error("Error:", error))
-  }
-
-  buildTracks(track: any): Track {
-    return {
-      name: track.name,
-      img: track.album.images[1].url,
-      trackId: track.id,
-      artist: {
-        id: track.artists[0].id,
-        name: track.artists[0].name,
-        img: ''
-      }
-    }
   }
 
   async assignArtistToTracks() {
