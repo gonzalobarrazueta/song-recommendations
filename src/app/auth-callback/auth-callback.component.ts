@@ -3,6 +3,7 @@ import { ActivatedRoute, Router, NavigationExtras } from "@angular/router";
 import { SpotifyAuthService } from "../services/spotify-auth.service";
 import { SpotifyService } from "../services/spotify.service";
 import { Track } from "../models/track";
+import { SharedService } from "../services/shared.service";
 
 @Component({
   selector: 'app-auth-callback',
@@ -17,7 +18,7 @@ export class AuthCallbackComponent implements OnInit {
   top_tracks: Track[] = [];
   artists = new Map();
 
-  constructor(private route: ActivatedRoute, private router: Router, private spotifyAuth: SpotifyAuthService, private spotify: SpotifyService) {}
+  constructor(private route: ActivatedRoute, private router: Router, private spotifyAuth: SpotifyAuthService, private spotify: SpotifyService, private sharedService: SharedService) {}
 
   ngOnInit(): void {
     this.getAuthorization();
@@ -35,6 +36,7 @@ export class AuthCallbackComponent implements OnInit {
         }
       })
       .then(data => {
+        this.sharedService.accessToken = data.access_token;
         this.access_token = data.access_token;
       })
       .catch(error => console.error("Error:", error));
