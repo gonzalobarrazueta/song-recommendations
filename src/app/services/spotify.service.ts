@@ -30,6 +30,18 @@ export class SpotifyService {
       headers: headers
     }
 
-     return fetch(`${base_address}/artists/${id}`, requestOptions);
+    return fetch(`${base_address}/artists/${id}`, requestOptions);
+  }
+
+  getRecommendations(access_token: string, limit: number, market: string, seedArtists: string[], seedGenres: string[], seedTracks: string[]) {
+    let headers = new Headers();
+    headers.set('Authorization', `Bearer ${access_token}`);
+
+    const requestOptions = {
+      method: "GET",
+      headers: headers
+    }
+
+    return fetch(`${base_address}/recommendations?limit=${limit}&market=${market}&seed_artists=${seedArtists}&seed_genres=${seedGenres}&seed_tracks=${seedTracks}`, requestOptions);
   }
 }
