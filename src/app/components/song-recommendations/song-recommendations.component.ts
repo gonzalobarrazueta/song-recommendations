@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Track } from "../models/track";
-import { SharedService } from "../services/shared.service";
-import { SpotifyService } from "../services/spotify.service";
+import { Track } from "../../models/track";
+import { SharedService } from "../../services/shared.service";
+import { SpotifyService } from "../../services/spotify.service";
 
 @Component({
   selector: 'app-song-recommendations',

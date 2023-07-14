@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, NavigationExtras } from "@angular/router";
-import { SpotifyAuthService } from "../services/spotify-auth.service";
-import { SpotifyService } from "../services/spotify.service";
-import { Track } from "../models/track";
-import { SharedService } from "../services/shared.service";
+import { SpotifyAuthService } from "../../services/spotify-auth.service";
+import { SpotifyService } from "../../services/spotify.service";
+import { Track } from "../../models/track";
+import { SharedService } from "../../services/shared.service";
 
 @Component({
   selector: 'app-auth-callback',

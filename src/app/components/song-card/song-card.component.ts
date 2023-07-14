@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Track } from "../models/track";
+import { Track } from "../../models/track";
 import { average } from "color.js";
 
 @Component({
