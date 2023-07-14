@@ -2,7 +2,7 @@
   <div class="page-title">
     <h1>Get recommendations based on your most played songs 🎶</h1>
   </div>
-  <div class="song-list" *ngIf="topTracks.length > 0">
-    <app-song-card *ngFor="let track of topTracks" [song]="track"></app-song-card>
+  <div class="song-list" *ngIf="tracks.length > 0">
+    <app-song-card *ngFor="let track of tracks" (click)="getRecommendationsPerTrack(track)" [song]="track"></app-song-card>
   </div>
 </div>
