@@ -70,6 +70,7 @@ export class AuthCallbackComponent implements OnInit {
     return {
       name: track.name,
       img: track.album.images[1].url,
+      trackId: track.id,
       artist: {
         id: track.artists[0].id,
         name: track.artists[0].name,
