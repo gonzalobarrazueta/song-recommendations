@@ -28,6 +28,11 @@ mat-card {
   }
 }
 
+button {
+  font-family: Inter, 'Tilt Warp', cursive;
+  font-weight: 600;
+}
+
 @keyframes bg-gradient {
   0% {
     background-position: left;
@@ -37,13 +42,14 @@ mat-card {
   }
 }
 
-@media (min-width: 450px) {
+@media (min-width: 650px) {
   .home {
     grid-template-rows: repeat(3, 1fr);
     grid-template-columns: repeat(4, 1fr);
   }
 
   mat-card {
+    padding: 30px 16px;
     grid-row: 2 / 3;
     grid-column: 2 / 4;
 
