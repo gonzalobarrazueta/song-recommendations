@@ -11,6 +11,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { AuthCallbackComponent } from './components/auth-callback/auth-callback.component';
 import { SongCardComponent } from './components/song-card/song-card.component';
 import { SongRecommendationsComponent } from './components/song-recommendations/song-recommendations.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { SongRecommendationsComponent } from './components/song-recommendations/
     HomeComponent,
     AuthCallbackComponent,
     SongCardComponent,
-    SongRecommendationsComponent
+    SongRecommendationsComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
