@@ -12,6 +12,7 @@ import { AuthCallbackComponent } from './components/auth-callback/auth-callback.
 import { SongCardComponent } from './components/song-card/song-card.component';
 import { SongRecommendationsComponent } from './components/song-recommendations/song-recommendations.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     AuthCallbackComponent,
     SongCardComponent,
     SongRecommendationsComponent,
-    NavbarComponent
+    NavbarComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,
