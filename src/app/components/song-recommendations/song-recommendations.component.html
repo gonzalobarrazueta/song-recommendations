@@ -5,4 +5,7 @@
   <div class="song-list" *ngIf="tracks.length > 0">
     <app-song-card *ngFor="let track of tracks" (click)="getRecommendationsPerTrack(track)" [song]="track"></app-song-card>
   </div>
+  <div class="loading-spinner" *ngIf="loading">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
 </div>
