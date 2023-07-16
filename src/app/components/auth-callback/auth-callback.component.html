@@ -1,15 +1,21 @@
 <div class="page-container">
   <mat-card>
-    <div>
-      <h1>
-        Get your most played songs.
-        <br>
-        Then, get recommendations based on them <span style="font-size: 25px">👇</span>
-      </h1>
+    <div *ngIf="!loading">
+      <div>
+        <h1>
+          Get your most played songs.
+          <br>
+          Then, get recommendations based on them <span style="font-size: 25px">👇</span>
+        </h1>
+      </div>
+
+      <div>
+        <button mat-raised-button (click)="getUserTopTracks()">Get Top Songs</button>
+      </div>
     </div>
 
-    <div>
-      <button mat-raised-button (click)="getUserTopTracks()">Get Top Songs</button>
+    <div class="spinner" *ngIf="loading">
+      <app-loading-spinner [width]="50"></app-loading-spinner>
     </div>
   </mat-card>
 </div>

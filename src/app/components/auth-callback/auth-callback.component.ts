@@ -18,6 +18,7 @@ export class AuthCallbackComponent implements OnInit {
   top_tracks: Track[] = [];
   artists = new Map();
   buildTracks: ((track: any) => Track);
+  loading: boolean = false;
 
   constructor(private route: ActivatedRoute, private router: Router, private spotifyAuth: SpotifyAuthService, private spotify: SpotifyService, private sharedService: SharedService) {
     this.buildTracks = this.sharedService.buildTracks;
@@ -46,6 +47,7 @@ export class AuthCallbackComponent implements OnInit {
   }
 
   getUserTopTracks() {
+    this.loading = true;
     this.spotify.getTopItems(this.access_token, "tracks", 6)
       .then(response => {
         if (response.ok) {
@@ -62,6 +64,7 @@ export class AuthCallbackComponent implements OnInit {
         }
         this.assignArtistToTracks()
           .then(() => {
+            this.loading = false;
             this.navigateToRecommendationsComponent();
           })
           .catch(error => console.error("Error:", error));
