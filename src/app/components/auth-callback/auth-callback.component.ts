@@ -16,7 +16,7 @@ export class AuthCallbackComponent implements OnInit {
   private access_token: string = '';
   private responseTracks: Array<any> = [];
   top_tracks: Track[] = [];
-  artists = new Map();
+  artistsPhotos: Map<string, string> = new Map();
   buildTracks: ((track: any) => Track);
   loading: boolean = false;
 
@@ -78,22 +78,14 @@ export class AuthCallbackComponent implements OnInit {
         const response = await this.spotify.getArtistById(this.access_token, this.top_tracks[i].artist.id);
         if (response.ok) {
           const responseArtist = await response.json();
-          this.mapArtists(responseArtist);
-          this.top_tracks[i].artist.img = this.artists.get(responseArtist.id);
+          this.artistsPhotos = this.sharedService.mapArtistToPhoto(responseArtist, this.artistsPhotos);
+          this.top_tracks[i].artist.img = this.artistsPhotos.get(responseArtist.id)!;
         } else {
           throw new Error("Request failed with status " + response.status);
         }
       } catch (error) {
         console.error("Error:", error);
       }
-    }
-  }
-
-  mapArtists(responseArtist: any) {
-    if (responseArtist.images.length > 0) {
-      this.artists.set(responseArtist.id, responseArtist.images[2].url);
-    } else {
-      this.artists.set(responseArtist.id, "../../assets/images/artist_profile_template.png");
     }
   }
 
