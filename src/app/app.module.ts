@@ -13,6 +13,7 @@ import { SongCardComponent } from './components/song-card/song-card.component';
 import { SongRecommendationsComponent } from './components/song-recommendations/song-recommendations.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
     SongCardComponent,
     SongRecommendationsComponent,
     NavbarComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
