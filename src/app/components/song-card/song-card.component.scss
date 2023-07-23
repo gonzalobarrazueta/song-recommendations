@@ -1,8 +1,6 @@
 figure {
   border-width: 0;
   border-style: solid;
-  border-radius: var(--border-radius);
-  box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
 
   margin: 0;
   max-width: 170px;
@@ -11,7 +9,6 @@ figure {
 
   img {
     width: 100%;
-    border-radius: var(--border-radius) var(--border-radius) 0 0;
   }
 }
 
@@ -21,8 +18,7 @@ figure:hover {
 }
 
 .song-information {
-  padding: 4px 16px 8px 16px;
-  border-radius: 0 0 var(--border-radius) var(--border-radius);
+  padding: 8px 10px;
 
   .song-title {
     margin: 5px 0;
@@ -41,26 +37,8 @@ figure:hover {
 }
 
 .artist {
-  display: flex;
-  align-items: center;
-
-  .profile-img {
-    border: 1px solid darkgray;
-    border-radius: 50%;
-    overflow: hidden;
-    width: 100%;
-    max-width: 30px;
-    height: auto;
-    max-height: 30px;
-    display: flex;
-
-    img {
-      object-fit: cover;
-    }
-  }
-
   h3 {
-    margin: 0 0 0 10px;
+    margin: 0;
     font-family: Inter, 'Tilt Warp', cursive;
     font-size: var(--fs-300);
     font-weight: 600;
