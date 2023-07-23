@@ -62,12 +62,8 @@ export class AuthCallbackComponent implements OnInit {
         for (let i = 0; i < tracks.length; i++) {
           this.top_tracks.push(this.buildTracks(tracks[i]));
         }
-        this.assignArtistToTracks()
-          .then(() => {
-            this.loading = false;
-            this.navigateToRecommendationsComponent();
-          })
-          .catch(error => console.error("Error:", error));
+        this.loading = false;
+        this.navigateToRecommendationsComponent();
       })
       .catch(error => console.error("Error:", error))
   }
