@@ -20,6 +20,13 @@ figure:hover {
 .song-information {
   padding: 8px 10px;
 
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.col:nth-child(1) {
   .song-title {
     margin: 5px 0;
     max-height: 30px;
@@ -33,14 +40,19 @@ figure:hover {
       font-weight: 700;
       line-height: 15px;
     }
-  };
+  }
+
+  .artist {
+    h3 {
+      margin: 0;
+      font-family: Inter, 'Tilt Warp', cursive;
+      font-size: var(--fs-300);
+      font-weight: 600;
+    }
+  }
 }
 
-.artist {
-  h3 {
-    margin: 0;
-    font-family: Inter, 'Tilt Warp', cursive;
-    font-size: var(--fs-300);
-    font-weight: 600;
-  }
+.col:nth-child(2) {
+  min-width: 20px;
+  width: 25px;
 }

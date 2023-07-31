@@ -1,14 +1,18 @@
 <figure style="{{border_color}}">
-
   <img [src]="song.img" alt="Song cover art">
 
   <figcaption class="song-information" style="{{gradient}}">
-    <div class="song-title">
-      <h2>{{song.name}}</h2>
-    </div>
+    <div class="col">
+      <div class="song-title">
+        <h2>{{song.name}}</h2>
+      </div>
 
-    <div class="artist">
-      <h3>{{song.artist.name}}</h3>
+      <div class="artist">
+        <h3>{{song.artist.name}}</h3>
+      </div>
+    </div>
+    <div class="col">
+      <img src="assets/images/Spotify_Icon_RGB_Black.png">
     </div>
   </figcaption>
 </figure>
