@@ -16,7 +16,7 @@
         </mat-expansion-panel-header>
         <form [formGroup]="configForm">
           <div class="form-field">
-            <label for="limit">Amount of tracks returned</label>
+            <label for="limit">Amount of tracks to return</label>
             <select id="limit" [formControlName]="'limit'">
               <option *ngFor="let amount of tracksAmount" [value]="amount">{{amount}}</option>
             </select>
