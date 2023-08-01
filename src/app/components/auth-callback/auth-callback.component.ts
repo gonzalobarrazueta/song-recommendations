@@ -4,6 +4,7 @@ import { SpotifyAuthService } from "../../services/spotify-auth.service";
 import { SpotifyService } from "../../services/spotify.service";
 import { Track } from "../../models/track";
 import { SharedService } from "../../services/shared.service";
+import { FormControl, FormGroup } from "@angular/forms";
 
 @Component({
   selector: 'app-auth-callback',
@@ -15,11 +16,19 @@ export class AuthCallbackComponent implements OnInit {
   private auth_code: string = '';
   private access_token: string = '';
   top_tracks: Track[] = [];
-  buildTracks: ((track: any) => Track);
+  buildTracks: (track: any) => Track;
+  getTimeRange: (timeRange: string) => string;
   loading: boolean = false;
+  tracksAmount: Array<number> = [6, 10, 12];
+  timeRange: Array<string> = ["last 4 weeks", "last 6 months", "all time"]
+  configForm = new FormGroup({
+    limit: new FormControl(),
+    range: new FormControl()
+  });
 
   constructor(private route: ActivatedRoute, private router: Router, private spotifyAuth: SpotifyAuthService, private spotify: SpotifyService, private sharedService: SharedService) {
     this.buildTracks = this.sharedService.buildTracks;
+    this.getTimeRange = this.sharedService.getTimeRange;
   }
 
   ngOnInit(): void {
@@ -46,7 +55,10 @@ export class AuthCallbackComponent implements OnInit {
 
   getUserTopTracks() {
     this.loading = true;
-    this.spotify.getTopItems(this.access_token, "tracks", 6)
+    let limit: number = this.configForm.value.limit ?? 6;
+    let timeRange: string = this.getTimeRange(this.configForm.value.range ?? "short_term");
+
+    this.spotify.getTopItems(this.access_token, "tracks", limit, timeRange)
       .then(response => {
         if (response.ok) return response.json();
         else throw new Error("Request failed with status " + response.status);
