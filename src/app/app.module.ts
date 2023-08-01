@@ -14,6 +14,10 @@ import { SongRecommendationsComponent } from './components/song-recommendations/
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { MatExpansionModule } from "@angular/material/expansion";
+import { ReactiveFormsModule } from "@angular/forms";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatSelectModule } from "@angular/material/select";
 
 @NgModule({
   declarations: [
@@ -32,7 +36,11 @@ import { FooterComponent } from './components/footer/footer.component';
     BrowserAnimationsModule,
     MatButtonModule,
     MatCardModule,
-    HttpClientModule
+    HttpClientModule,
+    MatExpansionModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

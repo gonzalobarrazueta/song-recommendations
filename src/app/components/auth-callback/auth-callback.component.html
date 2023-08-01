@@ -9,6 +9,27 @@
         </h1>
       </div>
 
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Configuration ⚙️</mat-panel-title>
+          <mat-panel-description>Optional</mat-panel-description>
+        </mat-expansion-panel-header>
+        <form [formGroup]="configForm">
+          <div class="form-field">
+            <label for="limit">Amount of tracks returned</label>
+            <select id="limit" [formControlName]="'limit'">
+              <option *ngFor="let amount of tracksAmount" [value]="amount">{{amount}}</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="range">Get top songs from</label>
+            <select id="range" [formControlName]="'range'">
+              <option *ngFor="let range of timeRange" [value]="range">{{range}}</option>
+            </select>
+          </div>
+        </form>
+      </mat-expansion-panel>
+
       <div>
         <button mat-raised-button (click)="getUserTopTracks()">Get Top Songs</button>
       </div>

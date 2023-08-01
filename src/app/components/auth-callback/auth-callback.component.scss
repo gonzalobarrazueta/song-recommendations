@@ -1,3 +1,35 @@
 .spinner {
   align-self: center;
 }
+
+mat-panel-title, mat-panel-description, label, select, option {
+  font-family:  Inter, 'Tilt Warp', cursive;
+}
+
+mat-panel-title {
+  font-weight: 600;
+}
+
+mat-expansion-panel {
+  margin-bottom: 16px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+form {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  gap: 16px;
+
+  .form-field {
+    display: flex;
+    flex-flow: column nowrap;
+    width: 40%;
+
+    select {
+      border-radius: 5px;
+      padding: 8px;
+      box-shadow: 1px 2px 5px 0 rgba(0, 0, 0, 0.15);
+    }
+  }
+}
