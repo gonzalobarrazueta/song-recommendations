@@ -9,7 +9,7 @@ export class SpotifyService {
 
   constructor() { }
 
-  async getTopItems(access_token: string, type: string, limit: number) {
+  async getTopItems(access_token: string, type: string, limit: number, timeRange: string) {
     let headers = new Headers();
     headers.set('Authorization', `Bearer ${access_token}`);
 
@@ -18,7 +18,7 @@ export class SpotifyService {
       headers: headers
     }
 
-    return fetch(`${base_address}/me/top/${type}?time_range=short_term&limit=${limit}`, requestOptions);
+    return fetch(`${base_address}/me/top/${type}?time_range=${timeRange}&limit=${limit}`, requestOptions);
   }
 
   getArtistById(access_token: string, id: string) {
