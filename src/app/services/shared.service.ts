@@ -33,4 +33,17 @@ export class SharedService {
       }
     }
   }
+
+  getTimeRange(timeRange: string): string {
+    switch (timeRange) {
+      case "last 4 weeks":
+        return "short_term";
+      case "last 6 months":
+        return "medium_term";
+      case "all time":
+        return "long_term";
+      default:
+        return "short_term";
+    }
+  }
 }
