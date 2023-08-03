@@ -1,6 +1,6 @@
 <div class="page-container">
   <div class="page-title">
-    <h1>Select a track, get a recommendation 🥁</h1>
+    <h1>Select a track and get a few recommendations</h1>
   </div>
   <div class="song-list" *ngIf="tracks.length > 0">
     <app-song-card *ngFor="let track of tracks" (click)="getRecommendationsPerTrack(track)" [song]="track"></app-song-card>
