@@ -26,6 +26,7 @@ export class SharedService {
       name: track.name,
       img: track.album.images[1].url,
       trackId: track.id,
+      spotifyUrl: track.external_urls.spotify,
       artist: {
         id: track.artists[0].id,
         name: track.artists[0].name,
