@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Track } from "../../models/track";
 import { average } from "color.js";
 
@@ -10,6 +10,7 @@ import { average } from "color.js";
 export class SongCardComponent implements OnInit {
 
   @Input() song!: Track;
+  @Output() request= new EventEmitter<boolean>();
   gradient: string = '';
   border_color: string = '';
 
@@ -27,5 +28,9 @@ export class SongCardComponent implements OnInit {
 
   async getImageColors() {
     return await average(this.song.img, { format: "hex" })
+  }
+
+  requestRecommendations() {
+    this.request.emit(true);
   }
 }

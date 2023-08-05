@@ -3,7 +3,7 @@
     <h1>Select a track and get a few recommendations</h1>
   </div>
   <div class="song-list" *ngIf="tracks.length > 0">
-    <app-song-card *ngFor="let track of tracks" (click)="getRecommendationsPerTrack(track)" [song]="track"></app-song-card>
+    <app-song-card *ngFor="let track of tracks" (request)="getRecommendationsPerTrack(track)" [song]="track"></app-song-card>
   </div>
   <div class="loading-spinner" *ngIf="loading">
     <app-loading-spinner></app-loading-spinner>

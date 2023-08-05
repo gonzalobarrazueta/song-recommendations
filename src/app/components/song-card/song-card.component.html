@@ -1,5 +1,5 @@
 <figure style="{{border_color}}">
-  <img [src]="song.img" alt="Song cover art">
+  <img [src]="song.img" alt="Song cover art" (click)="requestRecommendations()">
 
   <figcaption class="song-information" style="{{gradient}}">
     <div class="col">
@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="col">
-      <a [href]="song.spotifyUrl">
+      <a [href]="song.spotifyUrl" target="_blank">
         <img src="assets/images/Spotify_Icon_RGB_Black.png">
       </a>
     </div>
