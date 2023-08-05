@@ -13,8 +13,15 @@ figure {
 }
 
 figure:hover {
-  cursor: pointer;
   filter: drop-shadow(7px 8px 20px rgba(0, 0, 0, 0.25));
+}
+
+img:hover {
+  cursor: pointer;
+}
+
+figcaption:hover {
+  cursor: default;
 }
 
 .song-information {
