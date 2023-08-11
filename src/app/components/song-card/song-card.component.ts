@@ -11,11 +11,11 @@ export class SongCardComponent implements OnInit {
 
   @Input() song!: Track;
   @Output() request= new EventEmitter<boolean>();
-  gradient: string = '';
-  border_color: string = '';
+  gradient: string = "";
+  border_color: string = "";
 
   constructor() {
-    this.border_color = 'border-color: #F7F2E3;';
+    this.border_color = "border-color: #F7F2E3;";
   }
 
   ngOnInit(): void {
