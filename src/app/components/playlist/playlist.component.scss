@@ -1,0 +1,110 @@
+h1, h2, h3 {
+  font-family: Inter, 'Tilt Warp', cursive;
+  line-height: normal;
+  margin: 0;
+}
+
+.page-container {
+  margin: 0 auto;
+  width: 95%;
+}
+
+.page-title {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1.5rem 0;
+}
+
+.title {
+  font-size: var(--fs-500);
+  font-weight: 700;
+}
+
+.upload-btn {
+  background-color: #87EC68;
+  font-family: Inter, 'Tilt Warp', cursive;
+  font-size: var(--fs-300);
+  font-weight: 600;
+}
+
+.track {
+  box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  background-color: #323232;
+  color: #FFFFFF;
+
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+
+  .album-cover {
+    max-width: 80px;
+    max-height: 80px;
+  }
+
+  .album-cover img {
+    width: 100%;
+  }
+}
+
+.track-content {
+  padding: 0 1rem;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.track-info {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  gap: 5px;
+
+  h2 {
+    font-size: var(--fs-300);
+  }
+
+  h3 {
+    font-size: calc(var(--fs-300) - 2px);
+  }
+}
+
+.cta-buttons {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  gap: 2rem;
+
+  svg {
+    width: 20px;
+    color: #D7D7D7;
+    cursor: pointer;
+  }
+}
+
+.track + .track {
+  margin-top: 10px;
+}
+
+@media (min-width: 600px) {
+
+  .page-container {
+    max-width: 600px;
+    width: 80%;
+  }
+
+  .track-info {
+    gap: 3px;
+
+    h2 {
+      font-size: var(--fs-400);
+    }
+
+    h3 {
+      font-size: var(--fs-300);
+    }
+  }
+}
