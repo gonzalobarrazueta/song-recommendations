@@ -11,16 +11,19 @@ export class SongCardComponent implements OnInit {
 
   @Input() song!: Track;
   @Output() request= new EventEmitter<boolean>();
+  @Output() colorEmitter: EventEmitter<string> = new EventEmitter<string>();
   gradient: string = "";
-  border_color: string = "";
+  borderColor: string = "";
+  averageColor: string = "";
 
   constructor() {
-    this.border_color = "border-color: #F7F2E3;";
+    this.borderColor = "border-color: #F7F2E3;";
   }
 
   ngOnInit(): void {
     this.getImageColors()
       .then(averageColor => {
+        this.averageColor = `${averageColor}`;
         this.gradient = `background: radial-gradient(farthest-corner at 1px 1px, #F0F7FF 0%, ${averageColor}  100%);`;
       })
       .catch(console.error)
@@ -32,5 +35,9 @@ export class SongCardComponent implements OnInit {
 
   requestRecommendations() {
     this.request.emit(true);
+  }
+
+  sendAverageColor() {
+    this.colorEmitter.emit(this.averageColor);
   }
 }

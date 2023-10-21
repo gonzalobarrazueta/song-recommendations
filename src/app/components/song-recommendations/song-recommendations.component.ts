@@ -11,6 +11,7 @@ import { SpotifyService } from "../../services/spotify.service";
 export class SongRecommendationsComponent implements OnInit {
 
   private accessToken: string = "";
+  musicPlayerColor: string = "";
   tracks: Track[] = [];
   loading: boolean = false;
   buildTracks: ((track: any) => Track);
@@ -63,5 +64,9 @@ export class SongRecommendationsComponent implements OnInit {
       _recommendations.push(newTrack);
     }
     return _recommendations;
+  }
+
+  setMusicPlayerColor(color: string) {
+    this.musicPlayerColor = color;
   }
 }

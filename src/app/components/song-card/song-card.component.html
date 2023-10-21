@@ -1,5 +1,5 @@
-<figure style="{{border_color}}">
-  <img [src]="song.img" alt="Song cover art" (click)="requestRecommendations()">
+<figure style="{{borderColor}}">
+  <img [src]="song.img" alt="Song cover art" (click)="requestRecommendations(); sendAverageColor()" >
 
   <figcaption class="song-information" style="{{gradient}}">
     <div class="col">
