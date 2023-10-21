@@ -1,20 +1,31 @@
 <figure style="{{borderColor}}">
   <img [src]="song.img" alt="Song cover art" (click)="requestRecommendations(); sendAverageColor()" >
 
-  <figcaption class="song-information" style="{{gradient}}">
-    <div class="col">
-      <div class="song-title">
-        <h2>{{song.name}}</h2>
+  <figcaption class="card-caption" style="{{gradient}}">
+    <div class="song-data">
+      <div class="col">
+        <div class="song-title">
+          <h2>{{song.name}}</h2>
+        </div>
+
+        <div class="artist">
+          <h3>{{song.artist.name}}</h3>
+        </div>
       </div>
 
-      <div class="artist">
-        <h3>{{song.artist.name}}</h3>
+      <div class="col">
+        <a [href]="song.spotifyUrl" target="_blank">
+          <img src="assets/images/Spotify_Icon_RGB_Black.png">
+        </a>
       </div>
     </div>
-    <div class="col">
-      <a [href]="song.spotifyUrl" target="_blank">
-        <img src="assets/images/Spotify_Icon_RGB_Black.png">
-      </a>
+    <div class="card-buttons">
+      <button class="play-button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path fill="currentColor" d="M14.702 2.226A1 1 0 0 1 16 3.18v6.027a5.479 5.479 0 0 0-1-.184V6.18L8 8.368V15.5a2.5 2.5 0 1 1-1-2V5.368a1 1 0 0 1 .702-.955l7-2.187ZM8 7.32l7-2.187V3.18L8 5.368V7.32ZM5.5 14a1.5 1.5 0 1 0 0 3a1.5 1.5 0 0 0 0-3Zm13.5.5a4.5 4.5 0 1 1-9 0a4.5 4.5 0 0 1 9 0Zm-2.265-.436l-2.994-1.65a.5.5 0 0 0-.741.438v3.3a.5.5 0 0 0 .741.438l2.994-1.65a.5.5 0 0 0 0-.876Z"/></svg>
+      </button>
+      <button class="add-to-playlist-button">
+        <svg height="20" viewBox="0 0 48 48" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h48v48H0z" fill="none"/><path d="M28 20H4v4h24v-4zm0-8H4v4h24v-4zm8 16v-8h-4v8h-8v4h8v8h4v-8h8v-4h-8zM4 32h16v-4H4v4z"/></svg>
+      </button>
     </div>
   </figcaption>
 </figure>
