@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Track } from "../../models/track";
 import { average } from "color.js";
 
@@ -12,9 +12,11 @@ export class SongCardComponent implements OnInit {
   @Input() song!: Track;
   @Output() request= new EventEmitter<boolean>();
   @Output() colorEmitter: EventEmitter<string> = new EventEmitter<string>();
+  @ViewChild('musicPlayer') musicPlayer: any;
   gradient: string = "";
   borderColor: string = "";
   averageColor: string = "";
+  isTrackPlaying: boolean = false;
 
   constructor() {
     this.borderColor = "border-color: #F7F2E3;";
@@ -39,5 +41,23 @@ export class SongCardComponent implements OnInit {
 
   sendAverageColor() {
     this.colorEmitter.emit(this.averageColor);
+  }
+
+  onPlayButtonClick() {
+    if (this.isTrackPlaying) {
+      this.pauseTrack();
+    } else {
+      this.playTrack();
+    }
+  }
+
+  playTrack() {
+    this.isTrackPlaying = true;
+    this.musicPlayer.nativeElement.play();
+  }
+
+  pauseTrack() {
+    this.isTrackPlaying = false;
+    this.musicPlayer.nativeElement.pause();
   }
 }
