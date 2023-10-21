@@ -13,6 +13,7 @@ export class SongRecommendationsComponent implements OnInit {
   private accessToken: string = "";
   musicPlayerColor: string = "";
   tracks: Track[] = [];
+  playlist: Track[] = [];
   loading: boolean = false;
   buildTracks: ((track: any) => Track);
 
@@ -68,5 +69,9 @@ export class SongRecommendationsComponent implements OnInit {
 
   setMusicPlayerColor(color: string) {
     this.musicPlayerColor = color;
+  }
+
+  addToPlaylist(track: Track) {
+    this.playlist.push(track);
   }
 }

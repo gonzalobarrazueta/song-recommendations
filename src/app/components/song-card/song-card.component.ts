@@ -10,8 +10,9 @@ import { average } from "color.js";
 export class SongCardComponent implements OnInit {
 
   @Input() song!: Track;
-  @Output() request= new EventEmitter<boolean>();
+  @Output() request: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() colorEmitter: EventEmitter<string> = new EventEmitter<string>();
+  @Output() addToPlaylistEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
   @ViewChild('musicPlayer') musicPlayer: any;
   gradient: string = "";
   borderColor: string = "";
@@ -41,6 +42,10 @@ export class SongCardComponent implements OnInit {
 
   sendAverageColor() {
     this.colorEmitter.emit(this.averageColor);
+  }
+
+  addToPlaylist() {
+    this.addToPlaylistEmitter.emit(true);
   }
 
   onPlayButtonClick() {
