@@ -1,16 +1,36 @@
+* {
+  box-sizing: border-box;
+}
+
 .music-player {
-  padding: 1.5rem 0 1rem 0;
   width: 100%;
+  padding: 0 3% 1rem 0;
 
   display: flex;
   flex-flow: row nowrap;
-  justify-content: center;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
 
   position: fixed;
   bottom: 0;
   left: 0;
 }
 
-svg {
-  width: 30px;
+button {
+  border: 0;
+  padding: 1rem;
+  cursor: pointer;
+  border-radius: 50%;
+  background-color: #87EC68;
+  filter: drop-shadow(1px 3px 2px rgba(0, 0, 0, 0.25));
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-icon {
+  width: 25px;
+  height: 25px;
 }
