@@ -77,6 +77,6 @@ export class SongRecommendationsComponent implements OnInit {
   }
 
   redirectToPlaylist() {
-    this.router.navigate(['/playlist'], { queryParams: this.playlist });
+    this.router.navigate(['/playlist'], { queryParams: { data: JSON.stringify(this.playlist) } });
   }
 }
