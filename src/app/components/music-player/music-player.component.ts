@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-music-player',
@@ -8,10 +8,15 @@ import { Component, Input, OnInit } from '@angular/core';
 export class MusicPlayerComponent implements OnInit {
 
   @Input() color: string = "";
+  @Output() goToPlaylistEmitter: EventEmitter<boolean> = new EventEmitter<boolean>;
 
   constructor() {
   }
 
   ngOnInit(): void {
+  }
+
+  goToPlaylist() {
+    this.goToPlaylistEmitter.emit(true);
   }
 }

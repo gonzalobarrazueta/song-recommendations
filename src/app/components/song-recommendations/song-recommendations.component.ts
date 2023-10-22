@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Track } from "../../models/track";
 import { SharedService } from "../../services/shared.service";
 import { SpotifyService } from "../../services/spotify.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-song-recommendations',
@@ -17,7 +18,7 @@ export class SongRecommendationsComponent implements OnInit {
   loading: boolean = false;
   buildTracks: ((track: any) => Track);
 
-  constructor(private sharedService: SharedService, private spotifyService: SpotifyService) {
+  constructor(private sharedService: SharedService, private spotifyService: SpotifyService, private router: Router) {
     this.buildTracks = this.sharedService.buildTracks;
   }
 
@@ -73,5 +74,9 @@ export class SongRecommendationsComponent implements OnInit {
 
   addToPlaylist(track: Track) {
     this.playlist.push(track);
+  }
+
+  redirectToPlaylist() {
+    this.router.navigate(['/playlist'], { queryParams: this.playlist });
   }
 }
