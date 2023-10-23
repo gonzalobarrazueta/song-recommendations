@@ -30,7 +30,11 @@ button {
   align-items: center;
 }
 
-.button-icon {
+.play-icon, .pause-icon, .playlist-icon {
   width: 25px;
   height: 25px;
+
+  svg {
+    width: 100%;
+  }
 }

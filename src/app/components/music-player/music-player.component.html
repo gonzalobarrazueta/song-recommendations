@@ -1,11 +1,16 @@
 <div class="music-player">
-  <button class="play-button">
-    <div class="button-icon">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M18.54 9L8.88 3.46a3.42 3.42 0 0 0-5.13 3v11.12A3.42 3.42 0 0 0 7.17 21a3.43 3.43 0 0 0 1.71-.46L18.54 15a3.42 3.42 0 0 0 0-5.92Zm-1 4.19l-9.66 5.62a1.44 1.44 0 0 1-1.42 0a1.42 1.42 0 0 1-.71-1.23V6.42a1.42 1.42 0 0 1 .71-1.23A1.51 1.51 0 0 1 7.17 5a1.54 1.54 0 0 1 .71.19l9.66 5.58a1.42 1.42 0 0 1 0 2.46Z"/></svg>
+  <button class="playTrack-button">
+    <div class="pause-icon" *ngIf="isPlaying; else playButton">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="25" viewBox="0 0 20 20"><path fill="currentColor" fill-rule="evenodd" d="M6.75 3a2 2 0 0 0-2 2v10a2 2 0 1 0 4 0V5a2 2 0 0 0-2-2Zm6.5 0a2 2 0 0 0-2 2v10a2 2 0 1 0 4 0V5a2 2 0 0 0-2-2Z" clip-rule="evenodd"/></svg>
     </div>
+    <ng-template #playButton>
+      <div class="play-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="25" viewBox="0 0 20 20"><path fill="currentColor" d="M17.222 8.685a1.5 1.5 0 0 1 0 2.628l-10 5.498A1.5 1.5 0 0 1 5 15.496V4.502a1.5 1.5 0 0 1 2.223-1.314l10 5.497Z"/></svg>
+      </div>
+    </ng-template>
   </button>
   <button class="playlist-button" (click)="goToPlaylist()">
-    <div class="button-icon">
+    <div class="playlist-icon">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><path fill="currentColor" d="M32 64a8 8 0 0 1 8-8h176a8 8 0 0 1 0 16H40a8 8 0 0 1-8-8Zm8 72h120a8 8 0 0 0 0-16H40a8 8 0 0 0 0 16Zm72 48H40a8 8 0 0 0 0 16h72a8 8 0 0 0 0-16Zm130.3-67.66l-40-12A8 8 0 0 0 192 112v52.31A32 32 0 1 0 208 192v-69.25l29.7 8.91a8 8 0 1 0 4.6-15.32Z"/></svg>
     </div>
   </button>

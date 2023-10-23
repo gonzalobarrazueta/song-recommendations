@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Track } from "../../models/track";
 import { average } from "color.js";
+import { SharedService } from "../../services/shared.service";
 
 @Component({
   selector: 'app-song-card',
@@ -17,7 +18,7 @@ export class SongCardComponent implements OnInit {
   borderColor: string = "";
   averageColor: string = "";
 
-  constructor() {
+  constructor(private shared: SharedService) {
     this.borderColor = "border-color: #F7F2E3;";
   }
 
@@ -53,10 +54,12 @@ export class SongCardComponent implements OnInit {
   }
 
   playTrack() {
+    this.shared.playTrack(true);
     this.musicPlayer.nativeElement.play();
   }
 
   pauseTrack() {
+    this.shared.playTrack(false);
     this.musicPlayer.nativeElement.pause();
   }
 }
