@@ -20,7 +20,7 @@
       </div>
     </div>
     <div class="card-buttons">
-      <button class="play-button" *ngIf="song.previewUrl" (click)="onPlayButtonClick()">
+      <button class="play-button" *ngIf="song.previewUrl" (click)="onPlayButtonClick(song)">
         <audio #musicPlayer>
           <source [src]="song.previewUrl" type="audio/mpeg">
         </audio>

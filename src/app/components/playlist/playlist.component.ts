@@ -24,7 +24,7 @@ export class PlaylistComponent implements OnInit {
     });
   }
 
-  playOrPauseTrack() {
-    this.trackPlaying = !this.trackPlaying;
+  playOrPauseTrack(track: Track) {
+    track.isPlaying = !track.isPlaying;
   }
 }

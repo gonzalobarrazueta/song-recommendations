@@ -17,7 +17,6 @@ export class SongCardComponent implements OnInit {
   gradient: string = "";
   borderColor: string = "";
   averageColor: string = "";
-  isTrackPlaying: boolean = false;
 
   constructor() {
     this.borderColor = "border-color: #F7F2E3;";
@@ -48,21 +47,21 @@ export class SongCardComponent implements OnInit {
     this.addToPlaylistEmitter.emit(true);
   }
 
-  onPlayButtonClick() {
-    if (this.isTrackPlaying) {
+  onPlayButtonClick(track: Track) {
+    if (track.isPlaying) {
+      track.isPlaying  = false;
       this.pauseTrack();
     } else {
+      track.isPlaying = true;
       this.playTrack();
     }
   }
 
   playTrack() {
-    this.isTrackPlaying = true;
     this.musicPlayer.nativeElement.play();
   }
 
   pauseTrack() {
-    this.isTrackPlaying = false;
     this.musicPlayer.nativeElement.pause();
   }
 }

@@ -14,8 +14,8 @@
         <h3>{{track.artist.name}}</h3>
       </div>
       <div class="cta-buttons">
-        <div class="pause-button" *ngIf="trackPlaying; else playButton">
-          <div (click)="playOrPauseTrack()">
+        <div class="pause-button" *ngIf="track.isPlaying; else playButton">
+          <div (click)="playOrPauseTrack(track)">
             <svg class="w-[20px] h-[20px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="#D7D7D7" viewBox="0 0 16 18">
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M1 1.8c0-.442.32-.8.714-.8h1.429c.394 0 .714.358.714.8v14.4c0 .442-.32.8-.714.8H1.714a.678.678 0 0 1-.505-.234A.851.851 0 0 1 1 16.2V1.8Zm7.143 0c0-.442.32-.8.714-.8h1.429c.19 0 .37.084.505.234.134.15.209.354.209.566v14.4c0 .442-.32.8-.714.8H8.857c-.394 0-.714-.358-.714-.8V1.8Z" clip-rule="evenodd"/>
             </svg>
@@ -23,7 +23,7 @@
         </div>
         <ng-template #playButton>
           <div class="play-button">
-            <div (click)="playOrPauseTrack()">
+            <div (click)="playOrPauseTrack(track)">
               <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 18">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1.984v14.032a1 1 0 0 0 1.506.845l12.006-7.016a.974.974 0 0 0 0-1.69L2.506 1.139A1 1 0 0 0 1 1.984Z"/>
               </svg>
