@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Track } from "../models/track";
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -8,9 +8,13 @@ import { BehaviorSubject } from "rxjs";
 export class SharedService {
 
   private _accessToken: string;
+  private playTrackSubject: BehaviorSubject<boolean>;
+  public playTrack$: Observable<boolean>;
 
   constructor() {
     this._accessToken = "";
+    this.playTrackSubject = new BehaviorSubject<boolean>(false);
+    this.playTrack$ = this.playTrackSubject.asObservable();
   }
 
   get accessToken(): string {
@@ -48,5 +52,9 @@ export class SharedService {
       default:
         return "short_term";
     }
+  }
+
+  playTrack(trackIsPlaying: boolean) {
+    this.playTrackSubject.next(trackIsPlaying);
   }
 }
