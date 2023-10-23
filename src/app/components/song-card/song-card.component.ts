@@ -11,7 +11,6 @@ export class SongCardComponent implements OnInit {
 
   @Input() song!: Track;
   @Output() request: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() colorEmitter: EventEmitter<string> = new EventEmitter<string>();
   @Output() addToPlaylistEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
   @ViewChild('musicPlayer') musicPlayer: any;
   gradient: string = "";
@@ -37,10 +36,6 @@ export class SongCardComponent implements OnInit {
 
   requestRecommendations() {
     this.request.emit(true);
-  }
-
-  sendAverageColor() {
-    this.colorEmitter.emit(this.averageColor);
   }
 
   addToPlaylist() {

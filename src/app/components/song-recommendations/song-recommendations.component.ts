@@ -68,10 +68,6 @@ export class SongRecommendationsComponent implements OnInit {
     return _recommendations;
   }
 
-  setMusicPlayerColor(color: string) {
-    this.musicPlayerColor = color;
-  }
-
   addToPlaylist(track: Track) {
     this.playlist.push(track);
   }

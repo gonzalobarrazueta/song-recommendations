@@ -5,7 +5,6 @@
   <div class="song-list" *ngIf="tracks.length > 0">
     <app-song-card *ngFor="let track of tracks" [song]="track"
                    (request)="getRecommendationsPerTrack(track)"
-                   (colorEmitter)="setMusicPlayerColor($event)"
                    (addToPlaylistEmitter)="addToPlaylist(track)">
     </app-song-card>
   </div>
