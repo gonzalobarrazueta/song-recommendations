@@ -12,7 +12,6 @@ import { Router } from "@angular/router";
 export class SongRecommendationsComponent implements OnInit {
 
   private accessToken: string = "";
-  musicPlayerColor: string = "";
   tracks: Track[] = [];
   playlist: Track[] = [];
   loading: boolean = false;

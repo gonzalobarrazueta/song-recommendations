@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { SharedService } from "../../services/shared.service";
 
 @Component({
@@ -8,7 +8,6 @@ import { SharedService } from "../../services/shared.service";
 })
 export class MusicPlayerComponent implements OnInit {
 
-  @Input() color: string = "";
   @Output() goToPlaylistEmitter: EventEmitter<boolean> = new EventEmitter<boolean>;
   isPlaying: boolean = false;
 
