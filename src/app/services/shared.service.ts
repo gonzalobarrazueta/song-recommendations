@@ -8,12 +8,12 @@ import { BehaviorSubject, Observable } from "rxjs";
 export class SharedService {
 
   private _accessToken: string;
-  private playTrackSubject: BehaviorSubject<boolean>;
-  public playTrack$: Observable<boolean>;
+  private playTrackSubject: BehaviorSubject<Track>;
+  public playTrack$: Observable<Track>;
 
   constructor() {
     this._accessToken = "";
-    this.playTrackSubject = new BehaviorSubject<boolean>(false);
+    this.playTrackSubject = new BehaviorSubject<Track>({} as Track);
     this.playTrack$ = this.playTrackSubject.asObservable();
   }
 
@@ -54,7 +54,7 @@ export class SharedService {
     }
   }
 
-  playTrack(trackIsPlaying: boolean) {
-    this.playTrackSubject.next(trackIsPlaying);
+  playTrack(trackPlaying: Track) {
+    this.playTrackSubject.next(trackPlaying);
   }
 }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Track } from "../../models/track";
 import { average } from "color.js";
 import { SharedService } from "../../services/shared.service";
@@ -13,7 +13,6 @@ export class SongCardComponent implements OnInit {
   @Input() song!: Track;
   @Output() request: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() addToPlaylistEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @ViewChild('musicPlayer') musicPlayer: any;
   gradient: string = "";
   borderColor: string = "";
   averageColor: string = "";
@@ -44,22 +43,7 @@ export class SongCardComponent implements OnInit {
   }
 
   onPlayButtonClick(track: Track) {
-    if (track.isPlaying) {
-      track.isPlaying  = false;
-      this.pauseTrack();
-    } else {
-      track.isPlaying = true;
-      this.playTrack();
-    }
-  }
-
-  playTrack() {
-    this.shared.playTrack(true);
-    this.musicPlayer.nativeElement.play();
-  }
-
-  pauseTrack() {
-    this.shared.playTrack(false);
-    this.musicPlayer.nativeElement.pause();
+    track.isPlaying = true;
+    this.shared.playTrack(track);
   }
 }

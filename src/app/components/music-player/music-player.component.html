@@ -1,6 +1,6 @@
 <div class="music-player">
-  <button class="playTrack-button">
-    <div class="pause-icon" *ngIf="isPlaying; else playButton">
+  <button class="playTrack-button" (click)="onPlayButtonClick()">
+    <div class="pause-icon" *ngIf="track.isPlaying; else playButton">
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="25" viewBox="0 0 20 20"><path fill="currentColor" fill-rule="evenodd" d="M6.75 3a2 2 0 0 0-2 2v10a2 2 0 1 0 4 0V5a2 2 0 0 0-2-2Zm6.5 0a2 2 0 0 0-2 2v10a2 2 0 1 0 4 0V5a2 2 0 0 0-2-2Z" clip-rule="evenodd"/></svg>
     </div>
     <ng-template #playButton>
@@ -8,6 +8,9 @@
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="25" viewBox="0 0 20 20"><path fill="currentColor" d="M17.222 8.685a1.5 1.5 0 0 1 0 2.628l-10 5.498A1.5 1.5 0 0 1 5 15.496V4.502a1.5 1.5 0 0 1 2.223-1.314l10 5.497Z"/></svg>
       </div>
     </ng-template>
+    <audio #musicPlayer>
+      <source type="audio/mpeg">
+    </audio>
   </button>
   <button class="playlist-button" (click)="goToPlaylist()">
     <div class="playlist-icon">
