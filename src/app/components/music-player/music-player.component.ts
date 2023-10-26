@@ -35,8 +35,10 @@ export class MusicPlayerComponent implements OnInit {
       this.track.isPlaying = false;
       this.pauseTrack();
     } else {
-      this.track.isPlaying = true;
-      this.playTrack();
+      if (this.audioHasSource()) {
+        this.track.isPlaying = true;
+        this.playTrack();
+      }
     }
   }
 
@@ -51,5 +53,10 @@ export class MusicPlayerComponent implements OnInit {
   addAudioSource(src: string | null) {
     this.musicPlayer.nativeElement.src = src;
     this.musicPlayer.nativeElement.load();
+  }
+
+  audioHasSource(): boolean {
+    if (this.musicPlayer.nativeElement.src) return true;
+    return false;
   }
 }
