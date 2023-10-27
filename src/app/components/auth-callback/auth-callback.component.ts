@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, NavigationExtras } from "@angular/router";
+import { Router, NavigationExtras } from "@angular/router";
 import { SpotifyAuthService } from "../../services/spotify-auth.service";
 import { SpotifyService } from "../../services/spotify.service";
 import { Track } from "../../models/track";
@@ -15,9 +15,7 @@ export class AuthCallbackComponent implements OnInit {
 
   private auth_code: string = '';
   private access_token: string = '';
-  top_tracks: Track[] = [];
-  buildTracks: (track: any) => Track;
-  getTimeRange: (timeRange: string) => string;
+  top_tracks: Array<Track> = [];
   loading: boolean = false;
   tracksAmount: Array<number> = [6, 10, 12];
   timeRange: Array<string> = ["last 4 weeks", "last 6 months", "all time"]
@@ -26,9 +24,10 @@ export class AuthCallbackComponent implements OnInit {
     range: new FormControl()
   });
 
-  constructor(private route: ActivatedRoute, private router: Router, private spotifyAuth: SpotifyAuthService, private spotify: SpotifyService, private sharedService: SharedService) {
-    this.buildTracks = this.sharedService.buildTracks;
-    this.getTimeRange = this.sharedService.getTimeRange;
+  constructor(private spotifyAuth: SpotifyAuthService,
+              private spotify: SpotifyService,
+              private shared: SharedService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -47,7 +46,7 @@ export class AuthCallbackComponent implements OnInit {
         }
       })
       .then(data => {
-        this.sharedService.accessToken = data.access_token;
+        this.shared.accessToken = data.access_token;
         this.access_token = data.access_token;
       })
       .catch(error => console.error("Error:", error));
@@ -56,7 +55,7 @@ export class AuthCallbackComponent implements OnInit {
   getUserTopTracks() {
     this.loading = true;
     let limit: number = this.configForm.value.limit ?? 6;
-    let timeRange: string = this.getTimeRange(this.configForm.value.range ?? "short_term");
+    let timeRange: string = this.shared.getTimeRange(this.configForm.value.range ?? "short_term");
 
     this.spotify.getTopItems(this.access_token, "tracks", limit, timeRange)
       .then(response => {
@@ -65,7 +64,7 @@ export class AuthCallbackComponent implements OnInit {
       })
       .then(data => {
         for (let i = 0; i < data.items.length; i++) {
-          this.top_tracks.push(this.buildTracks(data.items[i]));
+          this.top_tracks.push(this.shared.buildTracks(data.items[i]));
         }
         this.loading = false;
         this.navigateToRecommendationsComponent();

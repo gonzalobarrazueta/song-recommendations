@@ -15,17 +15,15 @@ export class SongRecommendationsComponent implements OnInit {
   tracks: Track[] = [];
   playlist: Track[] = [];
   loading: boolean = false;
-  buildTracks: ((track: any) => Track);
 
-  constructor(private sharedService: SharedService, private spotifyService: SpotifyService, private router: Router) {
-    this.buildTracks = this.sharedService.buildTracks;
-    this.sharedService.playlist$.subscribe(playlist => this.playlist = playlist);
+  constructor(private shared: SharedService, private spotifyService: SpotifyService, private router: Router) {
+    this.shared.playlist$.subscribe(playlist => this.playlist = playlist);
   }
 
   ngOnInit(): void {
     const urlParams = new URLSearchParams(window.location.search);
     this.tracks = JSON.parse(urlParams.get("data") as string);
-    this.accessToken = this.sharedService.accessToken;
+    this.accessToken = this.shared.accessToken;
   }
 
   getRecommendationsPerTrack(track: Track) {
@@ -62,7 +60,7 @@ export class SongRecommendationsComponent implements OnInit {
     let _recommendations: Track[] = [];
     let newTrack: Track;
     for (let track of recommendations) {
-      newTrack = this.buildTracks(track);
+      newTrack = this.shared.buildTracks(track);
       _recommendations.push(newTrack);
     }
     return _recommendations;
@@ -73,7 +71,7 @@ export class SongRecommendationsComponent implements OnInit {
   }
 
   redirectToPlaylist() {
-    this.sharedService.addPlaylist(this.playlist);
+    this.shared.addPlaylist(this.playlist);
     this.router.navigate(['/playlist']);
   }
 }
