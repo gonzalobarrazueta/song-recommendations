@@ -10,11 +10,15 @@ export class SharedService {
   private _accessToken: string;
   private playTrackSubject: BehaviorSubject<Track>;
   public playTrack$: Observable<Track>;
+  private playlistSubject: BehaviorSubject<Array<Track>>;
+  public playlist$: Observable<Array<Track>>
 
   constructor() {
     this._accessToken = "";
     this.playTrackSubject = new BehaviorSubject<Track>({} as Track);
     this.playTrack$ = this.playTrackSubject.asObservable();
+    this.playlistSubject = new BehaviorSubject<Array<Track>>([]);
+    this.playlist$ = this.playlistSubject.asObservable();
   }
 
   get accessToken(): string {
@@ -56,5 +60,9 @@ export class SharedService {
 
   playTrack(trackPlaying: Track) {
     this.playTrackSubject.next(trackPlaying);
+  }
+
+  addPlaylist(playlist: Array<Track>) {
+    this.playlistSubject.next(playlist);
   }
 }

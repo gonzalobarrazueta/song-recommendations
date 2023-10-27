@@ -19,6 +19,7 @@ export class SongRecommendationsComponent implements OnInit {
 
   constructor(private sharedService: SharedService, private spotifyService: SpotifyService, private router: Router) {
     this.buildTracks = this.sharedService.buildTracks;
+    this.sharedService.playlist$.subscribe(playlist => this.playlist = playlist);
   }
 
   ngOnInit(): void {
@@ -72,6 +73,7 @@ export class SongRecommendationsComponent implements OnInit {
   }
 
   redirectToPlaylist() {
-    this.router.navigate(['/playlist'], { queryParams: { data: JSON.stringify(this.playlist) } });
+    this.sharedService.addPlaylist(this.playlist);
+    this.router.navigate(['/playlist']);
   }
 }
