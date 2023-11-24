@@ -13,9 +13,11 @@ export class SongCardComponent implements OnInit {
   @Input() song!: Track;
   @Output() request: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() addToPlaylistEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() deleteFromPlaylistEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
   gradient: string = "";
   borderColor: string = "";
   averageColor: string = "";
+  addedToPlaylist: boolean = false;
 
   constructor(private shared: SharedService) {
     this.borderColor = "border-color: #F7F2E3;";
@@ -38,8 +40,18 @@ export class SongCardComponent implements OnInit {
     this.request.emit(true);
   }
 
+  playlistRequests() {
+    if (!this.addedToPlaylist) this.addToPlaylist();
+    else this.deleteFromPlaylist();
+    this.addedToPlaylist = !this.addedToPlaylist;
+  }
+
   addToPlaylist() {
     this.addToPlaylistEmitter.emit(true);
+  }
+
+  deleteFromPlaylist() {
+    this.deleteFromPlaylistEmitter.emit(true);
   }
 
   onPlayButtonClick(track: Track) {

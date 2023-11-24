@@ -70,6 +70,11 @@ export class SongRecommendationsComponent implements OnInit {
     this.playlist.push(track);
   }
 
+  deleteFromPlaylist(trackIdToDelete: string) {
+    let idToDelete = this.playlist.findIndex(track => track.trackId === trackIdToDelete);
+    if (idToDelete !== -1) this.playlist.splice(idToDelete, 1);
+  }
+
   redirectToPlaylist() {
     this.shared.addPlaylist(this.playlist);
     this.router.navigate(['/playlist']);
