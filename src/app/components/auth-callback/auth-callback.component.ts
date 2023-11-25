@@ -31,12 +31,12 @@ export class AuthCallbackComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const urlParams = new URLSearchParams(window.location.search);
+    this.auth_code = urlParams.get("code") as string;
     this.getAuthorization();
   }
 
   getAuthorization() {
-    const urlParams = new URLSearchParams(window.location.search);
-    this.auth_code = urlParams.get("code") as string;
     this.spotifyAuth.getAccessToken(this.auth_code)
       .then(response => {
         if (response.ok) {
