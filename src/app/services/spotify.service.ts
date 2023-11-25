@@ -44,4 +44,16 @@ export class SpotifyService {
 
     return fetch(`${base_address}/recommendations?limit=${limit}&market=${market}&seed_artists=${seedArtists}&seed_genres=${seedGenres}&seed_tracks=${seedTracks}`, requestOptions);
   }
+
+  getCurrentUserProfile(access_token: string) {
+    let headers = new Headers();
+    headers.set('Authorization', `Bearer ${access_token}`);
+
+    const requestOptions = {
+      method: "GET",
+      headers: headers
+    }
+
+    return fetch(`${base_address}/me`, requestOptions);
+  }
 }
