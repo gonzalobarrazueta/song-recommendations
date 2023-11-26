@@ -31,6 +31,10 @@
   align-self: center;
 }
 
+mat-drawer {
+  width: 450px;
+}
+
 @media (max-width: 1000px) {
   .page-container {
     gap: 20px;

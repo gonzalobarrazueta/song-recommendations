@@ -1,16 +1,22 @@
-<div class="page-container">
-  <div class="page-title">
-    <h1>Select a track and get a few recommendations</h1>
-  </div>
-  <div class="song-list" *ngIf="tracks.length > 0">
-    <app-song-card *ngFor="let track of tracks" [song]="track"
-                   (request)="getRecommendationsPerTrack(track)"
-                   (addToPlaylistEmitter)="addToPlaylist(track)"
-                   (deleteFromPlaylistEmitter)="deleteFromPlaylist(track.trackId)">
-    </app-song-card>
-  </div>
-  <div class="loading-spinner" *ngIf="loading">
-    <app-loading-spinner></app-loading-spinner>
-  </div>
-</div>
-<app-music-player (goToPlaylistEmitter)="redirectToPlaylist()"></app-music-player>
+<mat-drawer-container>
+  <mat-drawer-content>
+    <div class="page-container">
+      <div class="page-title">
+        <h1>Select a track and get a few recommendations</h1>
+      </div>
+      <div class="song-list" *ngIf="tracks.length > 0">
+        <app-song-card *ngFor="let track of tracks" [song]="track"
+                       (request)="getRecommendationsPerTrack(track)"
+                       (addToPlaylistEmitter)="addToPlaylist(track)"
+                       (deleteFromPlaylistEmitter)="deleteFromPlaylist(track.trackId)">
+        </app-song-card>
+      </div>
+      <div class="loading-spinner" *ngIf="loading">
+        <app-loading-spinner></app-loading-spinner>
+      </div>
+    </div>
+  </mat-drawer-content>
+  <mat-drawer mode="side" position="end">
+  </mat-drawer>
+</mat-drawer-container>
+<app-music-player (goToPlaylistEmitter)="openPlaylist()"></app-music-player>

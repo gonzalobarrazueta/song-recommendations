@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Track } from "../../models/track";
 import { SharedService } from "../../services/shared.service";
 import { SpotifyService } from "../../services/spotify.service";
-import { Router } from "@angular/router";
+import { MatDrawer } from "@angular/material/sidenav";
 
 @Component({
   selector: 'app-song-recommendations',
@@ -15,8 +15,9 @@ export class SongRecommendationsComponent implements OnInit {
   tracks: Track[] = [];
   playlist: Track[] = [];
   loading: boolean = false;
+  @ViewChild(MatDrawer) drawer: any;
 
-  constructor(private shared: SharedService, private spotifyService: SpotifyService, private router: Router) {
+  constructor(private shared: SharedService, private spotifyService: SpotifyService) {
     this.shared.playlist$.subscribe(playlist => this.playlist = playlist);
   }
 
@@ -75,8 +76,8 @@ export class SongRecommendationsComponent implements OnInit {
     if (idToDelete !== -1) this.playlist.splice(idToDelete, 1);
   }
 
-  redirectToPlaylist() {
+  openPlaylist() {
     this.shared.addPlaylist(this.playlist);
-    this.router.navigate(['/playlist']);
+    this.drawer.toggle();
   }
 }
