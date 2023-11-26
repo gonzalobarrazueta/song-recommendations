@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Track } from "../models/track";
 import { BehaviorSubject, Observable } from "rxjs";
+import { User } from "../models/user";
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,8 @@ export class SharedService {
   public playTrack$: Observable<Track>;
   private playlistSubject: BehaviorSubject<Array<Track>>;
   public playlist$: Observable<Array<Track>>
+  private currentUserSubject: BehaviorSubject<User>;
+  public currentUser$: Observable<User>;
 
   constructor() {
     this._accessToken = "";
@@ -19,6 +22,8 @@ export class SharedService {
     this.playTrack$ = this.playTrackSubject.asObservable();
     this.playlistSubject = new BehaviorSubject<Array<Track>>([]);
     this.playlist$ = this.playlistSubject.asObservable();
+    this.currentUserSubject = new BehaviorSubject<User>({} as User);
+    this.currentUser$ = this.currentUserSubject.asObservable();
   }
 
   get accessToken(): string {
@@ -64,5 +69,9 @@ export class SharedService {
 
   addPlaylist(playlist: Array<Track>) {
     this.playlistSubject.next(playlist);
+  }
+
+  setUser(user: User) {
+    this.currentUserSubject.next(user);
   }
 }
