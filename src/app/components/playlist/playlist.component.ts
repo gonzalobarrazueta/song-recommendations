@@ -21,10 +21,6 @@ export class PlaylistComponent implements OnInit {
     this.shared.playlist$.subscribe(playlist => this.playlist = playlist);
   }
 
-  playOrPauseTrack(track: Track) {
-    track.isPlaying = !track.isPlaying;
-  }
-
   removeTrackFromPlaylist(trackToDelete: Track) {
     this.playlist = this.playlist.filter(track => track.trackId !== trackToDelete.trackId);
     this.shared.addPlaylist(this.playlist);
