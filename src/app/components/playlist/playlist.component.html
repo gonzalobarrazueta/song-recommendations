@@ -1,7 +1,7 @@
 <div class="page-container">
   <div class="page-title">
     <h1 class="title">Your playlist 🎷</h1>
-    <button *ngIf="playlist.length > 0" class="upload-btn" mat-raised-button>Upload to Spotify</button>
+    <button *ngIf="playlist.length > 0" class="upload-btn" mat-raised-button (click)="uploadPlaylist()">Upload to Spotify</button>
   </div>
 
   <div *ngIf="playlist.length > 0; else emptyPlaylist" >

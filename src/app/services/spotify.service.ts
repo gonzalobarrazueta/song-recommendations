@@ -56,4 +56,23 @@ export class SpotifyService {
 
     return fetch(`${base_address}/me`, requestOptions);
   }
+
+  createPlaylist(access_token: string, userId: string) {
+    let headers = new Headers();
+    headers.set('Authorization', `Bearer ${access_token}`);
+    headers.set('Content-Type', 'application/json');
+
+    let playlistInfo = {
+      name: "Music Loop Playlist",
+      description: "Playlist created from the Music Loop app"
+    }
+
+    const requestOptions = {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify(playlistInfo)
+    }
+
+    return fetch(`${base_address}/users/${userId}/playlists`, requestOptions);
+  }
 }
