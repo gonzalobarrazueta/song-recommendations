@@ -48,6 +48,7 @@ export class AuthCallbackComponent implements OnInit {
       .then(data => {
         this.shared.accessToken = data.access_token;
         this.access_token = data.access_token;
+        this.getUserProfile();
       })
       .catch(error => console.error("Error:", error));
   }
@@ -77,5 +78,15 @@ export class AuthCallbackComponent implements OnInit {
       queryParams: { data: JSON.stringify(this.top_tracks) }
     };
     this.router.navigate(["/recommendations"], navigationExtras);
+  }
+
+  getUserProfile() {
+    this.spotify.getCurrentUserProfile(this.access_token)
+      .then(response => {
+        if (response.ok) return response.json();
+        else throw new Error("Request failed with status " + response.status);
+      })
+      .then(user => this.shared.setUser({ id: user.id}))
+      .catch(error => console.error("Error:", error));
   }
 }
