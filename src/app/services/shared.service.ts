@@ -41,6 +41,7 @@ export class SharedService {
       trackId: track.id,
       spotifyUrl: track.external_urls.spotify,
       previewUrl: track.preview_url,
+      spotifyUri: track.uri,
       isPlaying: false,
       artist: {
         id: track.artists[0].id,
