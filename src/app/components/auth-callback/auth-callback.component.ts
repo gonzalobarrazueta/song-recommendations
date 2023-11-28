@@ -24,7 +24,7 @@ export class AuthCallbackComponent implements OnInit {
     range: new FormControl()
   });
 
-  constructor(private spotifyAuth: SpotifyAuthService,
+  constructor(private auth: SpotifyAuthService,
               private spotify: SpotifyService,
               private shared: SharedService,
               private router: Router) {
@@ -37,7 +37,7 @@ export class AuthCallbackComponent implements OnInit {
   }
 
   getAuthorization() {
-    this.spotifyAuth.getAccessToken(this.auth_code)
+    this.auth.getAccessToken(this.auth_code)
       .then(response => {
         if (response.ok) {
           return response.json();
