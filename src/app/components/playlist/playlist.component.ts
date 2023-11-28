@@ -31,9 +31,25 @@ export class PlaylistComponent implements OnInit {
     this.shared.currentUser$.subscribe(userId => {
       this.spotify.createPlaylist(this.shared.accessToken, userId.id)
         .then(response => {
-          if (!response.ok) throw new Error("Request failed with status " + response.status);
+          if (response.ok) return response.json()
+          else throw new Error("Request failed with status " + response.status);
         })
+        .then(playlist => this.addTracksToPlaylist(playlist.id))
         .catch(error => console.log(error));
     })
+  }
+
+  addTracksToPlaylist(playlistId: string) {
+    this.spotify.addTracksToPlaylist(this.shared.accessToken, playlistId, this.getSpotifyUris())
+      .then(response => {
+        if (!response.ok) throw new Error("Request failed with status " + response.status);
+      })
+      .catch(error => console.log(error));
+  }
+
+  getSpotifyUris(): Array<string> {
+    let uris: Array<string> = [];
+    for (let track of this.playlist) uris.push(track.spotifyUri);
+    return uris;
   }
 }
