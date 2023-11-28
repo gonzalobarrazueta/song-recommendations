@@ -75,4 +75,18 @@ export class SpotifyService {
 
     return fetch(`${base_address}/users/${userId}/playlists`, requestOptions);
   }
+
+  addTracksToPlaylist(access_token: string, playlistId: string, uris: Array<string>) {
+    let headers = new Headers();
+    headers.set('Authorization', `Bearer ${access_token}`);
+    headers.set('Content-Type', 'application/json');
+
+    const requestOptions = {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify({ uris })
+    }
+
+    return fetch(`${base_address}/playlists/${playlistId}/tracks`, requestOptions);
+  }
 }
