@@ -16,7 +16,9 @@
       </div>
     </div>
   </mat-drawer-content>
-  <mat-drawer [mode]="mobileQuery.matches ? 'side': 'over'" position="end">
+  <mat-drawer [style]="mobileQuery.matches ? 'width: 30%': 'width: 100%'"
+              [mode]="mobileQuery.matches ? 'side': 'over'"
+              position="end">
     <app-playlist></app-playlist>
   </mat-drawer>
 </mat-drawer-container>
