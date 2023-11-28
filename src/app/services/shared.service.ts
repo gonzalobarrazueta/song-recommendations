@@ -8,7 +8,6 @@ import { User } from "../models/user";
 })
 export class SharedService {
 
-  private _accessToken: string;
   private playTrackSubject: BehaviorSubject<Track>;
   public playTrack$: Observable<Track>;
   private playlistSubject: BehaviorSubject<Array<Track>>;
@@ -17,21 +16,12 @@ export class SharedService {
   public currentUser$: Observable<User>;
 
   constructor() {
-    this._accessToken = "";
     this.playTrackSubject = new BehaviorSubject<Track>({} as Track);
     this.playTrack$ = this.playTrackSubject.asObservable();
     this.playlistSubject = new BehaviorSubject<Array<Track>>([]);
     this.playlist$ = this.playlistSubject.asObservable();
     this.currentUserSubject = new BehaviorSubject<User>({} as User);
     this.currentUser$ = this.currentUserSubject.asObservable();
-  }
-
-  get accessToken(): string {
-    return this._accessToken;
-  }
-
-  set accessToken(value: string) {
-    this._accessToken = value;
   }
 
   buildTracks(track: any): Track {

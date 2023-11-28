@@ -6,7 +6,11 @@ import { environment } from "../../environments/environment";
 })
 export class SpotifyAuthService {
 
-  constructor() { }
+  private _accessToken: string;
+
+  constructor() {
+    this._accessToken = "";
+  }
 
   getAuthorization() {
     let query_parameters = new URLSearchParams({
@@ -37,5 +41,13 @@ export class SpotifyAuthService {
     })
 
     return response
+  }
+
+  get accessToken(): string {
+    return this._accessToken;
+  }
+
+  set accessToken(value: string) {
+    this._accessToken = value;
   }
 }

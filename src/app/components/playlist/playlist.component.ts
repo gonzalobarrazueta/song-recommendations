@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Track } from "../../models/track";
 import { SharedService } from "../../services/shared.service";
 import { SpotifyService } from "../../services/spotify.service";
+import { SpotifyAuthService } from "../../services/spotify-auth.service";
 
 @Component({
   selector: 'app-playlist',
@@ -13,7 +14,10 @@ export class PlaylistComponent implements OnInit {
   playlist: Array<Track>;
   trackPlaying: boolean;
 
-  constructor(private shared: SharedService, private spotify: SpotifyService) {
+  constructor(private shared: SharedService,
+              private spotify: SpotifyService,
+              private auth: SpotifyAuthService
+  ) {
     this.playlist = [];
     this.trackPlaying = false;
   }
@@ -29,7 +33,7 @@ export class PlaylistComponent implements OnInit {
 
   uploadPlaylist() {
     this.shared.currentUser$.subscribe(userId => {
-      this.spotify.createPlaylist(this.shared.accessToken, userId.id)
+      this.spotify.createPlaylist(this.auth.accessToken, userId.id)
         .then(response => {
           if (response.ok) return response.json()
           else throw new Error("Request failed with status " + response.status);
@@ -40,7 +44,7 @@ export class PlaylistComponent implements OnInit {
   }
 
   addTracksToPlaylist(playlistId: string) {
-    this.spotify.addTracksToPlaylist(this.shared.accessToken, playlistId, this.getSpotifyUris())
+    this.spotify.addTracksToPlaylist(this.auth.accessToken, playlistId, this.getSpotifyUris())
       .then(response => {
         if (!response.ok) throw new Error("Request failed with status " + response.status);
       })

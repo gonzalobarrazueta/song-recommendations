@@ -46,7 +46,7 @@ export class AuthCallbackComponent implements OnInit {
         }
       })
       .then(data => {
-        this.shared.accessToken = data.access_token;
+        this.auth.accessToken = data.access_token;
         this.access_token = data.access_token;
         this.getUserProfile();
       })
