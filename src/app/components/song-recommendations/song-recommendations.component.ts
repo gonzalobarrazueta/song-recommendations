@@ -39,20 +39,13 @@ export class SongRecommendationsComponent implements OnInit {
     this.loading = true;
     this.getRecommendations(track)
       .then(response => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("Request failed with status " + response.status);
-        }
+        if (response.ok) return response.json();
+        else throw new Error("Request failed with status " + response.status);
       })
       .then(data => {
         this.handleRecommendationsResponse(data)
-          .then(data => {
-            this.tracks = this.tracks.concat(data);
-          })
-          .then(() => {
-            this.loading = false;
-          });
+          .then(data => { this.tracks = this.tracks.concat(data); })
+          .then(() => { this.loading = false; });
       })
       .catch(error => {
         this.loading = false;

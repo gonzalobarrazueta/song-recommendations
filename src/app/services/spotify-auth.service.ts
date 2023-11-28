@@ -34,13 +34,11 @@ export class SpotifyAuthService {
     headers.set('content-type', 'application/x-www-form-urlencoded');
     headers.set('Authorization', 'Basic ' + btoa(`${environment.client_id}:${environment.client_secret}`));
 
-    let response = await fetch('https://accounts.spotify.com/api/token', {
+    return await fetch('https://accounts.spotify.com/api/token', {
       method: "POST",
       headers: headers,
       body: body
-    })
-
-    return response
+    });
   }
 
   get accessToken(): string {

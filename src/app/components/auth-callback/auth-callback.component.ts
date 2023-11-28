@@ -39,11 +39,8 @@ export class AuthCallbackComponent implements OnInit {
   getAuthorization() {
     this.auth.getAccessToken(this.auth_code)
       .then(response => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("Request failed with status " + response.status);
-        }
+        if (response.ok) return response.json();
+        else throw new Error("Request failed with status " + response.status);
       })
       .then(data => {
         this.auth.accessToken = data.access_token;
