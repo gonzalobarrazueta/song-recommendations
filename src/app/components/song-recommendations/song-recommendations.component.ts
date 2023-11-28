@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { Track } from "../../models/track";
 import { SharedService } from "../../services/shared.service";
 import { SpotifyService } from "../../services/spotify.service";
 import { MatDrawer } from "@angular/material/sidenav";
+import { MediaMatcher } from "@angular/cdk/layout";
 
 @Component({
   selector: 'app-song-recommendations',
@@ -16,9 +17,15 @@ export class SongRecommendationsComponent implements OnInit {
   playlist: Track[] = [];
   loading: boolean = false;
   @ViewChild(MatDrawer) drawer: any;
+  mobileQuery: MediaQueryList;
+  mobileQueryListener: () => void;
 
-  constructor(private shared: SharedService, private spotifyService: SpotifyService) {
+  constructor(private shared: SharedService, private spotifyService: SpotifyService,
+              changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
     this.shared.playlist$.subscribe(playlist => this.playlist = playlist);
+    this.mobileQuery = media.matchMedia('(min-width: 1400px)');
+    this.mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addEventListener("change", this.mobileQueryListener);
   }
 
   ngOnInit(): void {
