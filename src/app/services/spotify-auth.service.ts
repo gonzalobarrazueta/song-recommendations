@@ -48,4 +48,8 @@ export class SpotifyAuthService {
   set accessToken(value: string) {
     this._accessToken = value;
   }
+
+  logout() {
+    window.open('https://accounts.spotify.com/en/logout', '_blank');
+  }
 }
