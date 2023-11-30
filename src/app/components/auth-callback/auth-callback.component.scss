@@ -17,19 +17,28 @@ mat-expansion-panel {
 
 form {
   display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
+  flex-direction: column;
   gap: 16px;
 
   .form-field {
     display: flex;
     flex-flow: column nowrap;
-    width: 40%;
+    width: 60%;
 
     select {
       border-radius: 5px;
       padding: 8px;
       box-shadow: 1px 2px 5px 0 rgba(0, 0, 0, 0.15);
+    }
+  }
+}
+
+@media (min-width: 1050px) {
+  form {
+    flex-direction: row;
+
+    .form-field {
+      width: 40%;
     }
   }
 }
