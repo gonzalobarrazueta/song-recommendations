@@ -6,7 +6,11 @@ import { environment } from "../../environments/environment";
 })
 export class SpotifyAuthService {
 
-  constructor() { }
+  private _accessToken: string;
+
+  constructor() {
+    this._accessToken = "";
+  }
 
   getAuthorization() {
     let query_parameters = new URLSearchParams({
@@ -30,12 +34,22 @@ export class SpotifyAuthService {
     headers.set('content-type', 'application/x-www-form-urlencoded');
     headers.set('Authorization', 'Basic ' + btoa(`${environment.client_id}:${environment.client_secret}`));
 
-    let response = await fetch('https://accounts.spotify.com/api/token', {
+    return await fetch('https://accounts.spotify.com/api/token', {
       method: "POST",
       headers: headers,
       body: body
-    })
+    });
+  }
 
-    return response
+  get accessToken(): string {
+    return this._accessToken;
+  }
+
+  set accessToken(value: string) {
+    this._accessToken = value;
+  }
+
+  logout() {
+    window.open('https://accounts.spotify.com/en/logout', '_blank');
   }
 }

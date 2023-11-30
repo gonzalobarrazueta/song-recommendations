@@ -24,7 +24,7 @@ export class AuthCallbackComponent implements OnInit {
     range: new FormControl()
   });
 
-  constructor(private spotifyAuth: SpotifyAuthService,
+  constructor(private auth: SpotifyAuthService,
               private spotify: SpotifyService,
               private shared: SharedService,
               private router: Router) {
@@ -34,19 +34,17 @@ export class AuthCallbackComponent implements OnInit {
     const urlParams = new URLSearchParams(window.location.search);
     this.auth_code = urlParams.get("code") as string;
     this.getAuthorization();
+    this.shared.setLoginStatus(true);
   }
 
   getAuthorization() {
-    this.spotifyAuth.getAccessToken(this.auth_code)
+    this.auth.getAccessToken(this.auth_code)
       .then(response => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("Request failed with status " + response.status);
-        }
+        if (response.ok) return response.json();
+        else throw new Error("Request failed with status " + response.status);
       })
       .then(data => {
-        this.shared.accessToken = data.access_token;
+        this.auth.accessToken = data.access_token;
         this.access_token = data.access_token;
         this.getUserProfile();
       })

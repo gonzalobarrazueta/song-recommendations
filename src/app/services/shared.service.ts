@@ -8,30 +8,24 @@ import { User } from "../models/user";
 })
 export class SharedService {
 
-  private _accessToken: string;
   private playTrackSubject: BehaviorSubject<Track>;
   public playTrack$: Observable<Track>;
   private playlistSubject: BehaviorSubject<Array<Track>>;
   public playlist$: Observable<Array<Track>>
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser$: Observable<User>;
+  private isLoggedInSubject: BehaviorSubject<boolean>;
+  public isLoggedIn$: Observable<boolean>;
 
   constructor() {
-    this._accessToken = "";
     this.playTrackSubject = new BehaviorSubject<Track>({} as Track);
     this.playTrack$ = this.playTrackSubject.asObservable();
     this.playlistSubject = new BehaviorSubject<Array<Track>>([]);
     this.playlist$ = this.playlistSubject.asObservable();
     this.currentUserSubject = new BehaviorSubject<User>({} as User);
     this.currentUser$ = this.currentUserSubject.asObservable();
-  }
-
-  get accessToken(): string {
-    return this._accessToken;
-  }
-
-  set accessToken(value: string) {
-    this._accessToken = value;
+    this.isLoggedInSubject = new BehaviorSubject<boolean>(false);
+    this.isLoggedIn$ = this.isLoggedInSubject.asObservable();
   }
 
   buildTracks(track: any): Track {
@@ -74,5 +68,9 @@ export class SharedService {
 
   setUser(user: User) {
     this.currentUserSubject.next(user);
+  }
+
+  setLoginStatus(status: boolean) {
+    this.isLoggedInSubject.next(status);
   }
 }

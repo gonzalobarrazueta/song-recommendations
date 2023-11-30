@@ -4,6 +4,7 @@ import { SharedService } from "../../services/shared.service";
 import { SpotifyService } from "../../services/spotify.service";
 import { MatDrawer } from "@angular/material/sidenav";
 import { MediaMatcher } from "@angular/cdk/layout";
+import { SpotifyAuthService } from "../../services/spotify-auth.service";
 
 @Component({
   selector: 'app-song-recommendations',
@@ -20,7 +21,7 @@ export class SongRecommendationsComponent implements OnInit {
   mobileQuery: MediaQueryList;
   mobileQueryListener: () => void;
 
-  constructor(private shared: SharedService, private spotifyService: SpotifyService,
+  constructor(private shared: SharedService, private spotifyService: SpotifyService, private auth: SpotifyAuthService,
               changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
     this.shared.playlist$.subscribe(playlist => this.playlist = playlist);
     this.mobileQuery = media.matchMedia('(min-width: 1400px)');
@@ -31,27 +32,20 @@ export class SongRecommendationsComponent implements OnInit {
   ngOnInit(): void {
     const urlParams = new URLSearchParams(window.location.search);
     this.tracks = JSON.parse(urlParams.get("data") as string);
-    this.accessToken = this.shared.accessToken;
+    this.accessToken = this.auth.accessToken;
   }
 
   getRecommendationsPerTrack(track: Track) {
     this.loading = true;
     this.getRecommendations(track)
       .then(response => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("Request failed with status " + response.status);
-        }
+        if (response.ok) return response.json();
+        else throw new Error("Request failed with status " + response.status);
       })
       .then(data => {
         this.handleRecommendationsResponse(data)
-          .then(data => {
-            this.tracks = this.tracks.concat(data);
-          })
-          .then(() => {
-            this.loading = false;
-          });
+          .then(data => { this.tracks = this.tracks.concat(data); })
+          .then(() => { this.loading = false; });
       })
       .catch(error => {
         this.loading = false;

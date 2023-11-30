@@ -1,6 +1,6 @@
 <nav class="navbar">
   <a class="logo" href="/">Music Loop</a>
   <ul>
-    <li><a href="#">Log out</a></li>
+    <li *ngIf="isLoggedIn"><a href="#" (click)="logout()">Log out</a></li>
   </ul>
 </nav>
