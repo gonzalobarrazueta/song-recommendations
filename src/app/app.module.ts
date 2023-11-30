@@ -21,6 +21,7 @@ import { MatSelectModule } from "@angular/material/select";
 import { PlaylistComponent } from './components/playlist/playlist.component';
 import { MusicPlayerComponent } from './components/music-player/music-player.component';
 import { MatSidenavModule } from "@angular/material/sidenav";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { MatSidenavModule } from "@angular/material/sidenav";
         ReactiveFormsModule,
         MatFormFieldModule,
         MatSelectModule,
-        MatSidenavModule
+        MatSidenavModule,
+        MatSnackBarModule
     ],
   providers: [],
   bootstrap: [AppComponent]

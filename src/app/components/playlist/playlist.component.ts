@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Track } from "../../models/track";
 import { SharedService } from "../../services/shared.service";
 import { SpotifyService } from "../../services/spotify.service";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-playlist',
@@ -13,7 +14,7 @@ export class PlaylistComponent implements OnInit {
   playlist: Array<Track>;
   trackPlaying: boolean;
 
-  constructor(private shared: SharedService, private spotify: SpotifyService) {
+  constructor(private shared: SharedService, private spotify: SpotifyService, private snackBar: MatSnackBar) {
     this.playlist = [];
     this.trackPlaying = false;
   }
@@ -31,7 +32,10 @@ export class PlaylistComponent implements OnInit {
     this.shared.currentUser$.subscribe(userId => {
       this.spotify.createPlaylist(this.shared.accessToken, userId.id)
         .then(response => {
-          if (response.ok) return response.json()
+          if (response.ok) {
+            this.openSnackBar();
+            return response.json();
+          }
           else throw new Error("Request failed with status " + response.status);
         })
         .then(playlist => this.addTracksToPlaylist(playlist.id))
@@ -51,5 +55,12 @@ export class PlaylistComponent implements OnInit {
     let uris: Array<string> = [];
     for (let track of this.playlist) uris.push(track.spotifyUri);
     return uris;
+  }
+
+  openSnackBar() {
+    this.snackBar.open("Playlist uploaded to Spotify! ✅", 'Close', {
+      duration: 3000,
+      panelClass: ['playlistAddedSnack']
+    });
   }
 }
