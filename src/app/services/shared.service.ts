@@ -14,6 +14,8 @@ export class SharedService {
   public playlist$: Observable<Array<Track>>
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser$: Observable<User>;
+  private isLoggedInSubject: BehaviorSubject<boolean>;
+  public isLoggedIn$: Observable<boolean>;
 
   constructor() {
     this.playTrackSubject = new BehaviorSubject<Track>({} as Track);
@@ -22,6 +24,8 @@ export class SharedService {
     this.playlist$ = this.playlistSubject.asObservable();
     this.currentUserSubject = new BehaviorSubject<User>({} as User);
     this.currentUser$ = this.currentUserSubject.asObservable();
+    this.isLoggedInSubject = new BehaviorSubject<boolean>(false);
+    this.isLoggedIn$ = this.isLoggedInSubject.asObservable();
   }
 
   buildTracks(track: any): Track {
@@ -64,5 +68,9 @@ export class SharedService {
 
   setUser(user: User) {
     this.currentUserSubject.next(user);
+  }
+
+  setLoginStatus(status: boolean) {
+    this.isLoggedInSubject.next(status);
   }
 }

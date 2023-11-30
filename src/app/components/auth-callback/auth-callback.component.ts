@@ -34,6 +34,7 @@ export class AuthCallbackComponent implements OnInit {
     const urlParams = new URLSearchParams(window.location.search);
     this.auth_code = urlParams.get("code") as string;
     this.getAuthorization();
+    this.shared.setLoginStatus(true);
   }
 
   getAuthorization() {
