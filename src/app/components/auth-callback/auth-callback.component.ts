@@ -54,6 +54,7 @@ export class AuthCallbackComponent implements OnInit {
   getUserTopTracks() {
     this.loading = true;
     let limit: number = this.configForm.value.limit ?? 6;
+    this.shared.setAmountOfTracksToReturn(limit);
     let timeRange: string = this.shared.getTimeRange(this.configForm.value.range ?? "short_term");
 
     this.spotify.getTopItems(this.access_token, "tracks", limit, timeRange)

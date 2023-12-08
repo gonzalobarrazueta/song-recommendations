@@ -20,6 +20,7 @@ export class SongRecommendationsComponent implements OnInit {
   @ViewChild(MatDrawer) drawer: any;
   mobileQuery: MediaQueryList;
   mobileQueryListener: () => void;
+  amountOfTracksToReturn: number = 6;
 
   constructor(private shared: SharedService, private spotifyService: SpotifyService, private auth: SpotifyAuthService,
               changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
@@ -27,6 +28,7 @@ export class SongRecommendationsComponent implements OnInit {
     this.mobileQuery = media.matchMedia('(min-width: 1400px)');
     this.mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addEventListener("change", this.mobileQueryListener);
+    this.shared.amountOfTracks$.subscribe(amount => this.amountOfTracksToReturn = amount);
   }
 
   ngOnInit(): void {
@@ -37,7 +39,7 @@ export class SongRecommendationsComponent implements OnInit {
 
   getRecommendationsPerTrack(track: Track) {
     this.loading = true;
-    this.getRecommendations(track)
+    this.getRecommendations(track, this.amountOfTracksToReturn)
       .then(response => {
         if (response.ok) return response.json();
         else throw new Error("Request failed with status " + response.status);
@@ -53,8 +55,8 @@ export class SongRecommendationsComponent implements OnInit {
       });
   }
 
-  async getRecommendations(track: Track) {
-    return await this.spotifyService.getRecommendations(this.accessToken, 6, "PE", [track.artist.id], [], [track.trackId])
+  async getRecommendations(track: Track, amount: number) {
+    return await this.spotifyService.getRecommendations(this.accessToken, amount, "PE", [track.artist.id], [], [track.trackId])
   }
 
   async handleRecommendationsResponse(data: any) {
